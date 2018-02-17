@@ -6,44 +6,50 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="#{bundle.ViewPoemTitle}"></h:outputText>
-        </ui:define>
         <ui:define name="body">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewPoemLabel_pkPoem}"/>
-                    <h:outputText value="#{poemController.selected.pkPoem}" title="#{bundle.ViewPoemTitle_pkPoem}"/>
-                    <h:outputText value="#{bundle.ViewPoemLabel_title}"/>
-                    <h:outputText value="#{poemController.selected.title}" title="#{bundle.ViewPoemTitle_title}"/>
-                    <h:outputText value="#{bundle.ViewPoemLabel_content}"/>
-                    <h:outputText value="#{poemController.selected.content}" title="#{bundle.ViewPoemTitle_content}"/>
-                    <h:outputText value="#{bundle.ViewPoemLabel_creationDate}"/>
-                    <h:outputText value="#{poemController.selected.creationDate}" title="#{bundle.ViewPoemTitle_creationDate}">
-                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                    </h:outputText>
-                    <h:outputText value="#{bundle.ViewPoemLabel_validated}"/>
-                    <h:outputText value="#{poemController.selected.validated}" title="#{bundle.ViewPoemTitle_validated}"/>
-                    <h:outputText value="#{bundle.ViewPoemLabel_fkUser}"/>
-                    <h:outputText value="#{poemController.selected.fkUser}" title="#{bundle.ViewPoemTitle_fkUser}"/>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{poemController.destroyAndView}" value="#{bundle.ViewPoemDestroyLink}"/>
-                <br />
-                <br />
-                <h:link outcome="Edit" value="#{bundle.ViewPoemEditLink}"/>
-                <br />
-                <h:commandLink action="#{poemController.prepareCreate}" value="#{bundle.ViewPoemCreateLink}" />
-                <br />
-                <h:commandLink action="#{poemController.prepareList}" value="#{bundle.ViewPoemShowAllLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ViewPoemIndexLink}"/>
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="display-4"><h:outputText value="#{bundle.ViewPoemTitle}"></h:outputText></h1>
+                    <hr/>
+                    
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    <h:form>
+                        <h:panelGrid columns="2">
+                            <h:outputText value="#{bundle.ViewPoemLabel_pkPoem}"/>
+                            <h:outputText value="#{poemController.selected.pkPoem}" title="#{bundle.ViewPoemTitle_pkPoem}"/>
+                            <h:outputText value="#{bundle.ViewPoemLabel_title}"/>
+                            <h:outputText value="#{poemController.selected.title}" title="#{bundle.ViewPoemTitle_title}"/>
+                            <h:outputText value="#{bundle.ViewPoemLabel_content}"/>
+                            <h:outputText value="#{poemController.selected.content}" title="#{bundle.ViewPoemTitle_content}"/>
+                            <h:outputText value="#{bundle.ViewPoemLabel_creationDate}"/>
+                            <h:outputText value="#{poemController.selected.creationDate}" title="#{bundle.ViewPoemTitle_creationDate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                            <h:outputText value="#{bundle.ViewPoemLabel_validated}"/>
+                            <h:outputText value="#{poemController.selected.validated}" title="#{bundle.ViewPoemTitle_validated}"/>
+                            <h:outputText value="#{bundle.ViewPoemLabel_fkUser}"/>
+                            <h:outputText value="#{poemController.selected.fkUser}" title="#{bundle.ViewPoemTitle_fkUser}"/>
+                        </h:panelGrid>
+                        <br />
+                        <h:commandLink action="#{poemController.destroyAndView}" value="#{bundle.ViewPoemDestroyLink}"/>
+                        <br />
+                        <br />
+                        <h:link outcome="Edit" value="#{bundle.ViewPoemEditLink}"/>
+                        <br />
+                        <h:commandLink action="#{poemController.prepareCreate}" value="#{bundle.ViewPoemCreateLink}" />
+                        <br />
+                        <h:commandLink action="#{poemController.prepareList}" value="#{bundle.ViewPoemShowAllLink}"/>
+                        <br />
+                        <br />
+                        <h:link outcome="/index" value="#{bundle.ViewPoemIndexLink}"/>
 
-            </h:form>
+                    </h:form>
+                </div>
+            </div>
+
         </ui:define>
     </ui:composition>
 

@@ -6,62 +6,66 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="#{bundle.ListCommentTitle}"></h:outputText>
-        </ui:define>
         <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListCommentEmpty}" rendered="#{commentController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{commentController.items.rowCount > 0}">
-                    <h:outputText value="#{commentController.pagination.pageFirstItem + 1}..#{commentController.pagination.pageLastItem + 1}/#{commentController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{commentController.previous}" value="#{bundle.Previous} #{commentController.pagination.pageSize}" rendered="#{commentController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{commentController.next}" value="#{bundle.Next} #{commentController.pagination.pageSize}" rendered="#{commentController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{commentController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCommentTitle_pkComment}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.pkComment}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCommentTitle_content}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.content}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCommentTitle_fkUser}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.fkUser}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCommentTitle_fkPoem}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.fkPoem}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{commentController.prepareView}" value="#{bundle.ListCommentViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{commentController.prepareEdit}" value="#{bundle.ListCommentEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{commentController.destroy}" value="#{bundle.ListCommentDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
-                <br />
-                <h:commandLink action="#{commentController.prepareCreate}" value="#{bundle.ListCommentCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListCommentIndexLink}"/>
-            </h:form>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="display-4"><h:outputText value="#{bundle.ListCommentTitle}"></h:outputText></h1>
+                    <hr/>
+                    
+                    <h:form styleClass="jsfcrud_list_form">
+                        <h:panelGroup id="messagePanel" layout="block">
+                            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                        </h:panelGroup>
+                        <h:outputText escape="false" value="#{bundle.ListCommentEmpty}" rendered="#{commentController.items.rowCount == 0}"/>
+                        <h:panelGroup rendered="#{commentController.items.rowCount > 0}">
+                            <h:outputText value="#{commentController.pagination.pageFirstItem + 1}..#{commentController.pagination.pageLastItem + 1}/#{commentController.pagination.itemsCount}"/>&nbsp;
+                            <h:commandLink action="#{commentController.previous}" value="#{bundle.Previous} #{commentController.pagination.pageSize}" rendered="#{commentController.pagination.hasPreviousPage}"/>&nbsp;
+                            <h:commandLink action="#{commentController.next}" value="#{bundle.Next} #{commentController.pagination.pageSize}" rendered="#{commentController.pagination.hasNextPage}"/>&nbsp;
+                            <h:dataTable value="#{commentController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCommentTitle_pkComment}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.pkComment}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCommentTitle_content}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.content}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCommentTitle_fkUser}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.fkUser}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListCommentTitle_fkPoem}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.fkPoem}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="&nbsp;"/>
+                                    </f:facet>
+                                    <h:commandLink action="#{commentController.prepareView}" value="#{bundle.ListCommentViewLink}"/>
+                                    <h:outputText value=" "/>
+                                    <h:commandLink action="#{commentController.prepareEdit}" value="#{bundle.ListCommentEditLink}"/>
+                                    <h:outputText value=" "/>
+                                    <h:commandLink action="#{commentController.destroy}" value="#{bundle.ListCommentDestroyLink}"/>
+                                </h:column>
+                            </h:dataTable>
+                        </h:panelGroup>
+                        <br />
+                        <h:commandLink action="#{commentController.prepareCreate}" value="#{bundle.ListCommentCreateLink}"/>
+                        <br />
+                        <br />
+                        <h:link outcome="/index" value="#{bundle.ListCommentIndexLink}"/>
+                    </h:form>
+                </div>
+            </div>
         </ui:define>
     </ui:composition>
 

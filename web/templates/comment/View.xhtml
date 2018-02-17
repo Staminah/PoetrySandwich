@@ -6,38 +6,45 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="#{bundle.ViewCommentTitle}"></h:outputText>
-        </ui:define>
         <ui:define name="body">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewCommentLabel_pkComment}"/>
-                    <h:outputText value="#{commentController.selected.pkComment}" title="#{bundle.ViewCommentTitle_pkComment}"/>
-                    <h:outputText value="#{bundle.ViewCommentLabel_content}"/>
-                    <h:outputText value="#{commentController.selected.content}" title="#{bundle.ViewCommentTitle_content}"/>
-                    <h:outputText value="#{bundle.ViewCommentLabel_fkUser}"/>
-                    <h:outputText value="#{commentController.selected.fkUser}" title="#{bundle.ViewCommentTitle_fkUser}"/>
-                    <h:outputText value="#{bundle.ViewCommentLabel_fkPoem}"/>
-                    <h:outputText value="#{commentController.selected.fkPoem}" title="#{bundle.ViewCommentTitle_fkPoem}"/>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{commentController.destroyAndView}" value="#{bundle.ViewCommentDestroyLink}"/>
-                <br />
-                <br />
-                <h:link outcome="Edit" value="#{bundle.ViewCommentEditLink}"/>
-                <br />
-                <h:commandLink action="#{commentController.prepareCreate}" value="#{bundle.ViewCommentCreateLink}" />
-                <br />
-                <h:commandLink action="#{commentController.prepareList}" value="#{bundle.ViewCommentShowAllLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ViewCommentIndexLink}"/>
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="display-4"><h:outputText value="#{bundle.ViewCommentTitle}"></h:outputText></h1>
+                    <hr/>
+                               
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    <h:form>
+                        <h:panelGrid columns="2">
+                            <h:outputText value="#{bundle.ViewCommentLabel_pkComment}"/>
+                            <h:outputText value="#{commentController.selected.pkComment}" title="#{bundle.ViewCommentTitle_pkComment}"/>
+                            <h:outputText value="#{bundle.ViewCommentLabel_content}"/>
+                            <h:outputText value="#{commentController.selected.content}" title="#{bundle.ViewCommentTitle_content}"/>
+                            <h:outputText value="#{bundle.ViewCommentLabel_fkUser}"/>
+                            <h:outputText value="#{commentController.selected.fkUser}" title="#{bundle.ViewCommentTitle_fkUser}"/>
+                            <h:outputText value="#{bundle.ViewCommentLabel_fkPoem}"/>
+                            <h:outputText value="#{commentController.selected.fkPoem}" title="#{bundle.ViewCommentTitle_fkPoem}"/>
+                        </h:panelGrid>
+                        <br />
+                        <h:commandLink action="#{commentController.destroyAndView}" value="#{bundle.ViewCommentDestroyLink}"/>
+                        <br />
+                        <br />
+                        <h:link outcome="Edit" value="#{bundle.ViewCommentEditLink}"/>
+                        <br />
+                        <h:commandLink action="#{commentController.prepareCreate}" value="#{bundle.ViewCommentCreateLink}" />
+                        <br />
+                        <h:commandLink action="#{commentController.prepareList}" value="#{bundle.ViewCommentShowAllLink}"/>
+                        <br />
+                        <br />
+                        <h:link outcome="/index" value="#{bundle.ViewCommentIndexLink}"/>
 
-            </h:form>
+                    </h:form>
+                    
+                </div>
+            </div>
+          
         </ui:define>
     </ui:composition>
 
