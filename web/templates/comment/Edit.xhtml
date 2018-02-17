@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditCommentTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditCommentLabel_pkComment}" for="pkComment" />
+                    <h:inputText id="pkComment" value="#{commentController.selected.pkComment}" title="#{bundle.EditCommentTitle_pkComment}" required="true" requiredMessage="#{bundle.EditCommentRequiredMessage_pkComment}"/>
+                    <h:outputLabel value="#{bundle.EditCommentLabel_content}" for="content" />
+                    <h:inputTextarea rows="4" cols="30" id="content" value="#{commentController.selected.content}" title="#{bundle.EditCommentTitle_content}" required="true" requiredMessage="#{bundle.EditCommentRequiredMessage_content}"/>
+                    <h:outputLabel value="#{bundle.EditCommentLabel_fkUser}" for="fkUser" />
+                    <h:selectOneMenu id="fkUser" value="#{commentController.selected.fkUser}" title="#{bundle.EditCommentTitle_fkUser}" required="true" requiredMessage="#{bundle.EditCommentRequiredMessage_fkUser}">
+                        <f:selectItems value="#{userController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditCommentLabel_fkPoem}" for="fkPoem" />
+                    <h:selectOneMenu id="fkPoem" value="#{commentController.selected.fkPoem}" title="#{bundle.EditCommentTitle_fkPoem}" required="true" requiredMessage="#{bundle.EditCommentRequiredMessage_fkPoem}">
+                        <f:selectItems value="#{poemController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{commentController.update}" value="#{bundle.EditCommentSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditCommentViewLink}"/>
+                <br />
+                <h:commandLink action="#{commentController.prepareList}" value="#{bundle.EditCommentShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditCommentIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
