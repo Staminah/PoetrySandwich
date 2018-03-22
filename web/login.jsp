@@ -12,11 +12,11 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form method="POST" action="j_security_check">                
-            Username: <input type="text" name="j_username" />   
-            Password: <input type="password" name="j_password" />  
-            <input type="submit" value="Login" />              
-            <input type="reset" value="Reset" />          
-        </form>        
+        <form method="POST" action="j_security_check">
+            Username: <input type="text" name="j_username" />
+            Password: <input type="password" name="j_password" />
+            <input type="submit" value="Login" />
+            <input type="reset" value="Reset" />
+        </form>
     </body>
 </html>
