@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="template.xhtml">
+        <ui:define name="body">
+            <h1 class="display-4">Log In</h1>    
+            <hr/>
+            <form class="form-horizontal" method="POST" action="j_security_check">
+                <fieldset>
+                    <div class="control-group">
+                        <!-- Username -->
+                        <label class="control-label"  for="username">Username</label>
+                        <div class="controls">
+                            <input type="text" id="username" name="j_username" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <!-- Password-->
+                        <label class="control-label" for="password">Password</label>
+                        <div class="controls">
+                            <input type="password" id="password" name="j_password" class="input-xlarge" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <!-- Button -->
+                        <br></br>
+                        <div class="controls">
+                            <input class="btn btn-success" type="submit" value="Login" />
+                            <input class="btn btn-default" type="reset" value="Reset" />
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </ui:define>
+    </ui:composition>
+</html>
+
