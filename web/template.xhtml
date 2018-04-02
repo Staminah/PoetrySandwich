@@ -9,14 +9,13 @@
         <title><ui:insert name="title">Poetry Sandwich</ui:insert></title>
         <h:outputStylesheet library="css" name="style.css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></link>
-        <link href="{% static 'css/style.css' %}" rel="stylesheet" media="screen"></link>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></link>
     </h:head>
 
     <h:body>
         
         <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #7443a0;">
-          <a class="navbar-brand" href=""><i class="material-icons logo-icon">comment   </i>PoetrySandwich</a>
+          <a class="navbar-brand" href="/PoetrySandwich/"><i class="material-icons logo-icon">comment   </i>PoetrySandwich</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -24,10 +23,10 @@
           <div class="collapse navbar-collapse" id="navbarsDefault">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item">
-                <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/PoetrySandwich/"><i class="material-icons">home</i>Home<span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="">Poem List</a>
+                <a class="nav-link" href=""><i class="material-icons">view_list</i> Poem List</a>
               </li>
             </ul>
 
@@ -51,10 +50,16 @@
               </li>-->
             
               <li class="nav-item">
-                <a class="nav-link" href=""><i class="material-icons">assignment</i>Register</a>
+                <h:form rendered="#{empty request.remoteUser}">
+                    <h:commandLink action="#{userController.prepareCreateFromRegister}" class="nav-link"><i class="material-icons">assignment</i>Register</h:commandLink> 
+                </h:form>
+                <h:link outcome="/login.xhtml" rendered="#{not empty request.remoteUser}" class="nav-link" ><i class="material-icons">info</i>#{request.remoteUser}</h:link>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/PoetrySandwich/faces/login.jsp"><i class="material-icons">person_outline</i>Login</a>
+                <h:form rendered="#{not empty request.remoteUser}">
+                    <h:commandLink action="#{userAuthentication.logout}" class="nav-link" ><i class="material-icons">exit_to_app</i>Logout</h:commandLink>
+                </h:form>
+                <h:link outcome="/login.xhtml" rendered="#{empty request.remoteUser}" class="nav-link" ><i class="material-icons">person</i>Login</h:link>
               </li>
             </ul>
           </div>
@@ -66,15 +71,13 @@
 
         <footer class="footer">
             <div class="container">
-                <span class="text-muted">© HE-Arc 2018</span>
+                <span class="text-muted">HE-Arc © 2018</span>
             </div>
         </footer>
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script src="{% static 'js/main.js' %}"></script>
-
+    
     </h:body>
-
 </html>

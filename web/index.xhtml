@@ -18,9 +18,9 @@
                     <h:link outcome="/Author/homeAuthor" value="Home author"/>
                     
                     <hr/>
-                    <p>Welcome here on PoetrySandwich!</p>
-                    <br />
-                    
+
+                    <p>Welcome #{request.remoteUser}!</p>
+ 
                     <c:if test="#{request.isUserInRole('ADMIN')}">
                         <h:link outcome="/templates/comment/List" value="Show All Comment Items"/>
                         <br />

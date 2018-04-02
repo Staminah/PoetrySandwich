@@ -6,6 +6,9 @@ import src.controllers.util.PaginationHelper;
 import src.facades.UserFacade;
 
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -17,6 +20,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import src.entities.Role;
 
 @Named("userController")
 @SessionScoped
@@ -74,13 +78,30 @@ public class UserController implements Serializable {
     }
 
     public String prepareCreate() {
-        current = new User();
+        current = new User();        
         selectedItemIndex = -1;
         return "Create";
+    }
+    
+    public String prepareCreateFromRegister() {
+        current = new User();
+        
+        // Adding Date automatically
+        current.setCreationDate(new Date());
+        
+        //Adding Author Role automatically
+        Role fkRole = new Role(2);
+        current.setFkRole(fkRole);
+        
+        selectedItemIndex = -1;
+        return "register";
     }
 
     public String create() {
         try {
+            // Hash password with SHA-2
+            current.setPassword(bytesToHex(MessageDigest.getInstance("SHA-256").digest(current.getPassword().getBytes(StandardCharsets.UTF_8))));
+                    
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UserCreated"));
             return prepareCreate();
@@ -88,6 +109,32 @@ public class UserController implements Serializable {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
+    }
+    
+    public String createFromRegister() {
+        try {
+            // Hash password with SHA-2
+            current.setPassword(bytesToHex(MessageDigest.getInstance("SHA-256").digest(current.getPassword().getBytes(StandardCharsets.UTF_8))));
+                    
+            getFacade().create(current);
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UserCreated"));
+            return prepareCreateFromRegister();
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            return null;
+        }
+    }
+    
+    private String bytesToHex(byte[] hash) {
+        StringBuffer hexString = new StringBuffer();
+        for (int i = 0; i < hash.length; i++) {
+            String hex = Integer.toHexString(0xff & hash[i]);
+            if(hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+        return hexString.toString();
     }
 
     public String prepareEdit() {
