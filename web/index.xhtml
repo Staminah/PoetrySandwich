@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:composition template="template.xhtml">
         
@@ -13,22 +14,25 @@
                     <h1 class="display-4">Homepage</h1>
                     
                     <h:link outcome="/myAdmin/homeAdmin" value="Home admin"/><br />
+                    <h:link outcome="/Editor/homeEditor" value="Home editor"/><br />
                     <h:link outcome="/Author/homeAuthor" value="Home author"/>
                     
                     <hr/>
                     <p>Welcome here on PoetrySandwich!</p>
+                    <br />
                     
-                    <br />
-                    <h:link outcome="/templates/comment/List" value="Show All Comment Items"/>
-                    <br />
-                    <h:link outcome="/templates/poem/List" value="Show All Poem Items"/>
-                    <br />
-                    <h:link outcome="/templates/role/List" value="Show All Role Items"/>
-                    <br />
-                    <h:link outcome="/templates/tag/List" value="Show All Tag Items"/>
-                    <br />
-                    <h:link outcome="/templates/user/List" value="Show All User Items"/>
-                    <br />
+                    <c:if test="#{request.isUserInRole('ADMIN')}">
+                        <h:link outcome="/templates/comment/List" value="Show All Comment Items"/>
+                        <br />
+                        <h:link outcome="/templates/poem/List" value="Show All Poem Items"/>
+                        <br />
+                        <h:link outcome="/templates/role/List" value="Show All Role Items"/>
+                        <br />
+                        <h:link outcome="/templates/tag/List" value="Show All Tag Items"/>
+                        <br />
+                        <h:link outcome="/templates/user/List" value="Show All User Items"/>
+                        <br />
+                    </c:if>
                 </div>
             </div>
         </ui:define>

@@ -43,6 +43,21 @@
         <auth-constraint>
             <description/>
             <role-name>AUTHOR</role-name>
+            <role-name>ADMIN</role-name>
+            <role-name>EDITOR</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>ConstraintEditor</display-name>
+        <web-resource-collection>
+            <web-resource-name>EDITOR</web-resource-name>
+            <description/>
+            <url-pattern>/faces/Editor/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>EDITOR</role-name>
+            <role-name>ADMIN</role-name>
         </auth-constraint>
     </security-constraint>
     <login-config>
@@ -60,5 +75,9 @@
     <security-role>
         <description/>
         <role-name>AUTHOR</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>EDITOR</role-name>
     </security-role>
 </web-app>

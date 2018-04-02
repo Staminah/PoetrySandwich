@@ -18,6 +18,8 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
+import java.util.Date;
+
 @Named("poemController")
 @SessionScoped
 public class PoemController implements Serializable {
@@ -75,8 +77,15 @@ public class PoemController implements Serializable {
 
     public String prepareCreate() {
         current = new Poem();
+        // Creation Date
+        current.setCreationDate(new Date());
+        // Poem Validation
+        current.setValidated(false);
+        // User FacesContext.getCurrentInstance().getExternalContext().getRemoteUser()
+        //current.setFkUser();
+        
         selectedItemIndex = -1;
-        return "Create";
+        return "poem/Create";
     }
 
     public String create() {

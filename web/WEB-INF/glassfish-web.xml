@@ -9,6 +9,10 @@
     <role-name>AUTHOR</role-name>
     <group-name>AUTHOR</group-name>
   </security-role-mapping>
+  <security-role-mapping>
+    <role-name>EDITOR</role-name>
+    <group-name>EDITOR</group-name>
+  </security-role-mapping>
   <class-loader delegate="true"/>
   <jsp-config>
     <property name="keepgenerated" value="true">

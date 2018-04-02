@@ -191,6 +191,10 @@ public class UserController implements Serializable {
     public User getUser(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
+    
+    public User getUser(String s) {
+        return ejbFacade.findUserByName(s);
+    }
 
     @FacesConverter(forClass = User.class)
     public static class UserControllerConverter implements Converter {
