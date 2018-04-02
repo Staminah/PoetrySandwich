@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="body">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="display-4">Your profile</h1>
+                    <hr/>
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    <h:form>
+                        <div class="card">         
+                            <div class="card-body">
+                                <h3 class="card-title"><h:outputText value="Username"/></h3>
+                                <p class="card-text"><h:outputText value="#{userController.selected.username}" title="#{bundle.ViewUserTitle_username}"/></p>
+                                <hr/>
+                                <h3 class="card-title"><h:outputText value="Email"/></h3>
+                                <p class="card-text"><h:outputText value="#{userController.selected.mail}" title="#{bundle.ViewUserTitle_mail}"/></p>
+                            </div>
+                        </div>
+                        <br/>
+                        <h:commandLink rendered="#{userController.selected.username == request.remoteUser}" action="#{userController.destroyProfile}" class="btn btn-danger" value="Delete your account"/>
+                        &nbsp;
+                        <h:commandLink rendered="#{userController.selected.username == request.remoteUser}" action="#{userController.prepareEditProfile(request.remoteUser)}" class="btn btn-info" value="#{bundle.ListUserEditLink}"/>
+                    </h:form>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>
+

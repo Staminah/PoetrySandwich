@@ -1,5 +1,6 @@
 package src.controllers;
 
+import java.io.IOException;
 import src.entities.User;
 import src.controllers.util.JsfUtil;
 import src.controllers.util.PaginationHelper;
@@ -8,6 +9,7 @@ import src.facades.UserFacade;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.util.List;
 import java.util.Date;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -20,6 +22,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import src.controllers.util.UserAuthentication;
 import src.entities.Role;
 
 @Named("userController")
@@ -75,6 +78,11 @@ public class UserController implements Serializable {
         current = (User) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
+    }
+    
+    public String prepareProfile(String username) {
+        current = getUser(username);
+        return "viewProfile";
     }
 
     public String prepareCreate() {
@@ -142,12 +150,34 @@ public class UserController implements Serializable {
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
+    
+    public String prepareEditProfile(String username) {
+        current = getUser(username);
+        return "editProfile";
+    }
 
     public String update() {
         try {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UserUpdated"));
             return "View";
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            return null;
+        }
+    }
+    
+    public String updateProfile() {
+        try {
+            getFacade().edit(current);
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UserUpdated"));
+            try {
+                UserAuthentication.logout();
+            }
+            catch(IOException e) {
+                e.printStackTrace();
+            }
+            return "viewProfile";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -161,6 +191,17 @@ public class UserController implements Serializable {
         recreatePagination();
         recreateModel();
         return "List";
+    }
+    
+    public String destroyProfile() {
+        performDestroy();
+        try {
+            UserAuthentication.logout();
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+        return "index";
     }
 
     public String destroyAndView() {
@@ -240,7 +281,8 @@ public class UserController implements Serializable {
     }
     
     public User getUser(String s) {
-        return ejbFacade.findUserByName(s);
+        List<User> users =ejbFacade.findUserByName(s);
+        return users.get(0);
     }
 
     @FacesConverter(forClass = User.class)

@@ -24,7 +24,7 @@ public class UserAuthentication {
     public UserAuthentication() {
     }
     
-    public void logout() throws IOException {
+    public static void logout() throws IOException {
      	FacesContext context = FacesContext.getCurrentInstance();
      	context.getExternalContext().invalidateSession();
         context.getExternalContext().redirect("index.xhtml");

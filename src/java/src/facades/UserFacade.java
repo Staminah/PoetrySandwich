@@ -5,6 +5,7 @@
  */
 package src.facades;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -30,10 +31,10 @@ public class UserFacade extends AbstractFacade<User> {
         super(User.class);
     }
     
-    public User findUserByName(String s){
+    public List<User> findUserByName(String s){
         Query queryAllValues = em.createNamedQuery("User.findByUsername");
-        queryAllValues.setParameter("str", s);
-        return (User) queryAllValues.getResultList();
+        queryAllValues.setParameter("username", s);
+        return queryAllValues.getResultList();
     }
     
 }
