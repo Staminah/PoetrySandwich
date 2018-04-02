@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="body">
@@ -22,17 +23,20 @@
                                 <h:inputText id="title" value="#{poemController.selected.title}" title="#{bundle.CreatePoemTitle_title}" required="true" requiredMessage="#{bundle.CreatePoemRequiredMessage_title}"/>
                                 <h:outputLabel value="#{bundle.CreatePoemLabel_content}" for="content" />
                                 <h:inputTextarea rows="4" cols="30" id="content" value="#{poemController.selected.content}" title="#{bundle.CreatePoemTitle_content}" required="true" requiredMessage="#{bundle.CreatePoemRequiredMessage_content}"/>
-                                <!--<h:outputLabel value="#{bundle.CreatePoemLabel_creationDate}" for="creationDate" />
-                                <h:inputText id="creationDate" value="#{poemController.selected.creationDate}" title="#{bundle.CreatePoemTitle_creationDate}" required="true" requiredMessage="#{bundle.CreatePoemRequiredMessage_creationDate}">
-                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                                </h:inputText> -->
-                                <!--<h:outputLabel value="#{bundle.CreatePoemLabel_validated}" for="validated" />
-                                <h:inputText id="validated" value="#{poemController.selected.validated}" title="#{bundle.CreatePoemTitle_validated}" required="true" requiredMessage="#{bundle.CreatePoemRequiredMessage_validated}"/>
-                                -->
-                                <h:outputLabel value="#{bundle.CreatePoemLabel_fkUser}" for="fkUser" />
-                                <h:selectOneMenu id="fkUser" value="#{poemController.selected.fkUser}" title="#{bundle.CreatePoemTitle_fkUser}" required="true" requiredMessage="#{bundle.CreatePoemRequiredMessage_fkUser}">
-                                    <f:selectItems value="#{userController.itemsAvailableSelectOne}"/>
-                                </h:selectOneMenu>
+                                    
+                                <c:if test="#{request.isUserInRole('ADMIN')}">
+                                    <h:outputLabel value="#{bundle.CreatePoemLabel_creationDate}" for="creationDate" />
+                                    <h:inputText id="creationDate" value="#{poemController.selected.creationDate}" title="#{bundle.CreatePoemTitle_creationDate}" required="true" requiredMessage="#{bundle.CreatePoemRequiredMessage_creationDate}">
+                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                    </h:inputText>
+                                    <h:outputLabel value="#{bundle.CreatePoemLabel_validated}" for="validated" />
+                                    <h:inputText id="validated" value="#{poemController.selected.validated}" title="#{bundle.CreatePoemTitle_validated}" required="true" requiredMessage="#{bundle.CreatePoemRequiredMessage_validated}"/>
+                                    
+                                    <h:outputLabel value="#{bundle.CreatePoemLabel_fkUser}" for="fkUser" />
+                                    <h:selectOneMenu id="fkUser" value="#{poemController.selected.fkUser}" title="#{bundle.CreatePoemTitle_fkUser}" required="true" requiredMessage="#{bundle.CreatePoemRequiredMessage_fkUser}">
+                                        <f:selectItems value="#{userController.itemsAvailableSelectOne}"/>
+                                    </h:selectOneMenu>
+                                </c:if>
                                 
                             </h:panelGrid>
                             <br />
