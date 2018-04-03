@@ -193,7 +193,8 @@ public class TagController implements Serializable {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Tag.class)
+    //@FacesConverter(forClass = Tag.class)
+    @FacesConverter("tagConverter")
     public static class TagControllerConverter implements Converter {
 
         @Override
