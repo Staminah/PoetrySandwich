@@ -71,13 +71,13 @@ public class UserController implements Serializable {
 
     public String prepareList() {
         recreateModel();
-        return "/faces/List.xhtml";
+        return "/faces/templates/user/List.xhtml";
     }
 
     public String prepareView() {
         current = (User) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "/faces/View.xhtml";
+        return "/faces/templates/user/View.xhtml";
     }
     
     public String prepareProfile(String username) {
@@ -88,7 +88,7 @@ public class UserController implements Serializable {
     public String prepareCreate() {
         current = new User();        
         selectedItemIndex = -1;
-        return "/faces/Create.xhtml";
+        return "/faces/templates/user/Create.xhtml";
     }
     
     public String prepareCreateFromRegister() {
@@ -148,7 +148,7 @@ public class UserController implements Serializable {
     public String prepareEdit() {
         current = (User) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "/faces/Edit.xhtml";
+        return "/faces/templates/user/Edit.xhtml";
     }
     
     public String prepareEditProfile(String username) {
@@ -160,7 +160,7 @@ public class UserController implements Serializable {
         try {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UserUpdated"));
-            return "/faces/View.xhtml";
+            return "/faces/templates/user/View.xhtml";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -190,7 +190,7 @@ public class UserController implements Serializable {
         performDestroy();
         recreatePagination();
         recreateModel();
-        return "/faces/List.xhtml";
+        return "/faces/templates/user/List.xhtml";
     }
     
     public String destroyProfile() {
@@ -201,7 +201,7 @@ public class UserController implements Serializable {
         catch(IOException e) {
             e.printStackTrace();
         }
-        return "/faces/index.xhtml";
+        return "/faces/templates/user/index.xhtml";
     }
 
     public String destroyAndView() {
@@ -209,11 +209,11 @@ public class UserController implements Serializable {
         recreateModel();
         updateCurrentItem();
         if (selectedItemIndex >= 0) {
-            return "/faces/View.xhtml";
+            return "/faces/templates/user/View.xhtml";
         } else {
             // all items were removed - go back to list
             recreateModel();
-            return "/faces/List.xhtml";
+            return "/faces/templates/user/List.xhtml";
         }
     }
 
@@ -259,13 +259,13 @@ public class UserController implements Serializable {
     public String next() {
         getPagination().nextPage();
         recreateModel();
-        return "/faces/List.xhtml";
+        return "/faces/templates/user/List.xhtml";
     }
 
     public String previous() {
         getPagination().previousPage();
         recreateModel();
-        return "/faces/List.xhtml";
+        return "/faces/templates/user/List.xhtml";
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {

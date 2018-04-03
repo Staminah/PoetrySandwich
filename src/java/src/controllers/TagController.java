@@ -64,19 +64,19 @@ public class TagController implements Serializable {
 
     public String prepareList() {
         recreateModel();
-        return "/faces/List.xhtml";
+        return "/faces/templates/tag/List.xhtml";
     }
 
     public String prepareView() {
         current = (Tag) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "/faces/View.xhtml";
+        return "/faces/templates/tag/View.xhtml";
     }
 
     public String prepareCreate() {
         current = new Tag();
         selectedItemIndex = -1;
-        return "/faces/Create.xhtml";
+        return "/faces/templates/tag/Create.xhtml";
     }
 
     public String create() {
@@ -93,14 +93,14 @@ public class TagController implements Serializable {
     public String prepareEdit() {
         current = (Tag) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "/faces/Edit.xhtml";
+        return "/faces/templates/tag/Edit.xhtml";
     }
 
     public String update() {
         try {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("TagUpdated"));
-            return "/faces/View.xhtml";
+            return "/faces/templates/tag/View.xhtml";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -113,7 +113,7 @@ public class TagController implements Serializable {
         performDestroy();
         recreatePagination();
         recreateModel();
-        return "/faces/List.xhtml";
+        return "/faces/templates/tag/List.xhtml";
     }
 
     public String destroyAndView() {
@@ -121,11 +121,11 @@ public class TagController implements Serializable {
         recreateModel();
         updateCurrentItem();
         if (selectedItemIndex >= 0) {
-            return "/faces/View.xhtml";
+            return "/faces/templates/tag/View.xhtml";
         } else {
             // all items were removed - go back to list
             recreateModel();
-            return "/faces/List.xhtml";
+            return "/faces/templates/tag/List.xhtml";
         }
     }
 
@@ -171,13 +171,13 @@ public class TagController implements Serializable {
     public String next() {
         getPagination().nextPage();
         recreateModel();
-        return "/faces/List.xhtml";
+        return "/faces/templates/tag/List.xhtml";
     }
 
     public String previous() {
         getPagination().previousPage();
         recreateModel();
-        return "/faces/List.xhtml";
+        return "/faces/templates/tag/List.xhtml";
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {

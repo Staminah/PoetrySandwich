@@ -64,19 +64,19 @@ public class CommentController implements Serializable {
 
     public String prepareList() {
         recreateModel();
-        return "/faces/List.xhtml";
+        return "/faces/templates/comment/List.xhtml";
     }
 
     public String prepareView() {
         current = (Comment) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "/faces/View.xhtml";
+        return "/faces/templates/comment/View.xhtml";
     }
 
     public String prepareCreate() {
         current = new Comment();
         selectedItemIndex = -1;
-        return "/faces/Create.xhtml";
+        return "/faces/templates/comment/Create.xhtml";
     }
 
     public String create() {
@@ -93,14 +93,14 @@ public class CommentController implements Serializable {
     public String prepareEdit() {
         current = (Comment) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "/faces/Edit.xhtml";
+        return "/faces/templates/comment/Edit.xhtml";
     }
 
     public String update() {
         try {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CommentUpdated"));
-            return "/faces/View.xhtml";
+            return "/faces/templates/comment/View.xhtml";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -113,7 +113,7 @@ public class CommentController implements Serializable {
         performDestroy();
         recreatePagination();
         recreateModel();
-        return "/faces/List.xhtml";
+        return "/faces/templates/comment/List.xhtml";
     }
 
     public String destroyAndView() {
@@ -121,11 +121,11 @@ public class CommentController implements Serializable {
         recreateModel();
         updateCurrentItem();
         if (selectedItemIndex >= 0) {
-            return "/faces/View.xhtml";
+            return "/faces/templates/comment/View.xhtml";
         } else {
             // all items were removed - go back to list
             recreateModel();
-            return "/faces/List.xhtml";
+            return "/faces/templates/comment/List.xhtml";
         }
     }
 
@@ -171,13 +171,13 @@ public class CommentController implements Serializable {
     public String next() {
         getPagination().nextPage();
         recreateModel();
-        return "/faces/List.xhtml";
+        return "/faces/templates/comment/List.xhtml";
     }
 
     public String previous() {
         getPagination().previousPage();
         recreateModel();
-        return "/faces/List.xhtml";
+        return "/faces/templates/commentList.xhtml";
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
