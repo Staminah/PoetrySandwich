@@ -39,7 +39,7 @@
                                 </c:if>
                                 
                                 <h:outputLabel value="#{bundle.CreateTagLabel_name}" for="tagCollection" />
-                                <h:selectManyMenu id="tagCollection" value="#{poemController.selected.tagCollection}" title="#{bundle.CreateTagTitle}" required="true" requiredMessage="#{bundle.CreateTagRequiredMessage_pkTag}">
+                                <h:selectManyMenu id="tagCollection" value="#{poemController.selected.tagCollection}" title="#{bundle.CreateTagTitle}" required="false" requiredMessage="#{bundle.CreateTagRequiredMessage_pkTag}">
                                     <f:selectItems value="#{tagController.getItemsAvailableSelectMany()}"/>
                                     <f:converter converterId="tagConverter" />
                                 </h:selectManyMenu>
@@ -50,9 +50,6 @@
                             <br />
                             <br />
                             <h:commandLink action="#{poemController.prepareList}" value="#{bundle.CreatePoemShowAllLink}" immediate="true"/>
-                            <br />
-                            <br />
-                            <h:link outcome="/index" value="#{bundle.CreatePoemIndexLink}"/>
                         </h:form>
                     
                 </div>

@@ -64,19 +64,19 @@ public class RoleController implements Serializable {
 
     public String prepareList() {
         recreateModel();
-        return "List";
+        return "/faces/templates/role/List.xhtml";
     }
 
     public String prepareView() {
         current = (Role) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "View";
+        return "/faces/templates/role/View.xhtml";
     }
 
     public String prepareCreate() {
         current = new Role();
         selectedItemIndex = -1;
-        return "Create";
+        return "/faces/templates/role/Create.xhtml";
     }
 
     public String create() {
@@ -93,14 +93,14 @@ public class RoleController implements Serializable {
     public String prepareEdit() {
         current = (Role) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "Edit";
+        return "/faces/templates/role/Edit.xhtml";
     }
 
     public String update() {
         try {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RoleUpdated"));
-            return "View";
+            return "/faces/templates/role/View.xhtml";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -113,7 +113,7 @@ public class RoleController implements Serializable {
         performDestroy();
         recreatePagination();
         recreateModel();
-        return "List";
+        return "/faces/templates/role/List.xhtml";
     }
 
     public String destroyAndView() {
@@ -121,11 +121,11 @@ public class RoleController implements Serializable {
         recreateModel();
         updateCurrentItem();
         if (selectedItemIndex >= 0) {
-            return "View";
+            return "/faces/templates/role/View.xhtml";
         } else {
             // all items were removed - go back to list
             recreateModel();
-            return "List";
+            return "/faces/templates/role/List.xhtml";
         }
     }
 
@@ -171,13 +171,13 @@ public class RoleController implements Serializable {
     public String next() {
         getPagination().nextPage();
         recreateModel();
-        return "List";
+        return "/faces/templates/role/List.xhtml";
     }
 
     public String previous() {
         getPagination().previousPage();
         recreateModel();
-        return "List";
+        return "/faces/templates/role/List.xhtml";
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {

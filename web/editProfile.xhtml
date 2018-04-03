@@ -20,15 +20,15 @@
                         <div class="card">         
                             <div class="card-body">
                                 <h3 class="card-title"><h:outputLabel value="#{bundle.EditUserLabel_username}" for="username" /></h3>
-                                <p class="card-text"><h:inputText id="username" value="#{userController.selected.username}" title="#{bundle.EditUserTitle_username}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_username}"/></p>
+                                <p class="card-text"><h:inputText id="username" value="#{userController.selected.username}" title="#{bundle.EditUserTitle_username}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_username}" class="form-control"/></p>
                                 <hr/>
                                 <h3 class="card-title"><h:outputLabel value="#{bundle.EditUserLabel_mail}" for="mail" /></h3>
-                                <p class="card-text"><h:inputText id="mail" value="#{userController.selected.mail}" title="#{bundle.EditUserTitle_mail}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_mail}"/></p>
+                                <p class="card-text"><h:inputText id="mail" value="#{userController.selected.mail}" title="#{bundle.EditUserTitle_mail}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_mail}" class="form-control"/></p>
                             </div>
                         </div>
                         <br/>
                         <div class="alert alert-danger" role="alert">
-                            <strong>Save changes will disconnect you !</strong> (Because JEE)
+                            <strong>Save changes will disconnect you !</strong> (Sorry about that)
                         </div>
                         <h:commandLink action="#{userController.updateProfile}" class="btn btn-success" value="#{bundle.EditUserSaveLink}"/>
                     </h:form>
