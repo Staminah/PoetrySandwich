@@ -115,7 +115,11 @@ public class PoemController implements Serializable {
     public String create() {
         try {
             System.out.println("POEM CONTROLLER CREATE");
+            
+            System.out.println(current.getTagCollection());
+            System.out.println(current.getFkUser());
             getFacade().create(current);
+            
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PoemCreated"));
             return prepareCreate();
         } catch (Exception e) {
