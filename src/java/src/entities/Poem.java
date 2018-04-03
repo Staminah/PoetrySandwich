@@ -16,6 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -74,7 +75,10 @@ public class Poem implements Serializable {
     @NotNull
     @Column(name = "validated")
     private char validated;
-    @ManyToMany(mappedBy = "poemCollection")
+    @JoinTable(name = "tb_poem_tag", joinColumns = {
+        @JoinColumn(name = "pk_fk_poem", referencedColumnName = "pk_poem")}, inverseJoinColumns = {
+        @JoinColumn(name = "pk_fk_tag", referencedColumnName = "pk_tag")})
+    @ManyToMany
     private Collection<Tag> tagCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPoem")
     private Collection<Comment> commentCollection;
