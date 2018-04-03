@@ -3,51 +3,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:composition template="template.xhtml">
-        
+    <ui:composition template="/template.xhtml">
         <ui:define name="body">
+            
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="display-4">Homepage</h1>
-                    
-                    <h:link outcome="/myAdmin/homeAdmin" value="Home admin"/><br />
-                    <h:link outcome="/Editor/homeEditor" value="Home editor"/><br />
-                    <h:link outcome="/Author/homeAuthor" value="Home author"/>
-                    
+                    <h1 class="display-4"> <h:outputText value="#{bundle.ListPoemTitle}"></h:outputText></h1>
                     <hr/>
-
-                    <p>Welcome #{request.remoteUser}!</p>
                     
-                    
- 
-                    <c:if test="#{request.isUserInRole('ADMIN')}">
-                        <h:link outcome="/templates/comment/List" value="Show All Comment Items"/>
-                        <br />
-                        <h:link outcome="/templates/poem/List" value="Show All Poem Items"/>
-                        <br />
-                        <h:link outcome="/templates/role/List" value="Show All Role Items"/>
-                        <br />
-                        <h:link outcome="/templates/tag/List" value="Show All Tag Items"/>
-                        <br />
-                        <h:link outcome="/templates/user/List" value="Show All User Items"/>
-                        <br />
-                    </c:if>
-                    
-                    <hr />
-                    
-                       <h:form styleClass="jsfcrud_list_form">
+                    <h:form styleClass="jsfcrud_list_form">
                         <h:panelGroup id="messagePanel" layout="block">
                             <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                         </h:panelGroup>
-                        <h:outputText escape="false" value="#{bundle.ListPoemEmpty}" rendered="#{poemController.items.rowCount == 0}"/>
-                        <h:panelGroup rendered="#{poemController.items.rowCount > 0}">
-                            <h:outputText value="#{poemController.pagination.pageFirstItem + 1}..#{poemController.pagination.pageLastItem + 1}/#{poemController.pagination.itemsCount}"/>&nbsp;
-                            <h:commandLink action="#{poemController.previous}" value="#{bundle.Previous} #{poemController.pagination.pageSize}" rendered="#{poemController.pagination.hasPreviousPage}"/>&nbsp;
-                            <h:commandLink action="#{poemController.next}" value="#{bundle.Next} #{poemController.pagination.pageSize}" rendered="#{poemController.pagination.hasNextPage}"/>&nbsp;
-                            <h:dataTable value="#{poemController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:outputText escape="false" value="#{bundle.ListPoemEmpty}" rendered="#{poemController.poemListByUser.rowCount == 0}"/>
+                        <h:panelGroup rendered="#{poemController.poemListByUser.rowCount > 0}">
+                           <h:dataTable value="#{poemController.poemListByUser}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="#{bundle.ListPoemTitle_pkPoem}"/>
@@ -86,6 +58,16 @@
                                     </f:facet>
                                     <h:outputText value="#{item.fkUser}"/>
                                 </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="&nbsp;"/>
+                                    </f:facet>
+                                    <h:commandLink action="#{poemController.prepareView}" value="#{bundle.ListPoemViewLink}"/>
+                                    <h:outputText value=" "/>
+                                    <h:commandLink action="#{poemController.prepareEdit}" value="#{bundle.ListPoemEditLink}"/>
+                                    <h:outputText value=" "/>
+                                    <h:commandLink action="#{poemController.destroy}" value="#{bundle.ListPoemDestroyLink}"/>
+                                </h:column>
                             </h:dataTable>
                         </h:panelGroup>
                         <br />
@@ -93,6 +75,7 @@
                     
                 </div>
             </div>
+           
         </ui:define>
     </ui:composition>
 
