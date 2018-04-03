@@ -28,6 +28,11 @@
               <li class="nav-item">
                 <a class="nav-link" href=""><i class="material-icons">view_list</i> Poem List</a>
               </li>
+              <li class="nav-item">
+                <h:form rendered="#{not empty request.remoteUser}">
+                    <h:commandLink action="#{poemController.prepareCreate}" class="btn btn-primary" ><i class="material-icons">add</i>New Poem</h:commandLink>
+                </h:form>
+              </li>
             </ul>
 
             <form class="form-inline my-2 my-lg-0">

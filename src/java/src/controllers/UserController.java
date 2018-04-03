@@ -281,7 +281,7 @@ public class UserController implements Serializable {
     }
     
     public User getUser(String s) {
-        List<User> users =ejbFacade.findUserByName(s);
+        List<User> users = ejbFacade.findUserByName(s);
         return users.get(0);
     }
 

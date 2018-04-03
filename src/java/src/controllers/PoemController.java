@@ -1,6 +1,7 @@
 package src.controllers;
 
 import src.entities.Poem;
+import src.entities.User;
 import src.controllers.util.JsfUtil;
 import src.controllers.util.PaginationHelper;
 import src.facades.PoemFacade;
@@ -17,6 +18,9 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+
+import javax.faces.context.ExternalContext;
+import javax.servlet.http.HttpServletRequest;
 
 import java.util.Date;
 
@@ -80,13 +84,23 @@ public class PoemController implements Serializable {
         current = new Poem();
         // Creation Date
         current.setCreationDate(new Date());
-        // Poem Validation
-        current.setValidated(false);
         // User FacesContext.getCurrentInstance().getExternalContext().getRemoteUser()
-        //current.setFkUser();
+        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+        HttpServletRequest request = (HttpServletRequest)context.getRequest();
+        User currentUser = getFacade().getCurrentUser(request.getRemoteUser());
+        
+        boolean validated = true;
+        
+        if(!request.isUserInRole("ADMIN")){
+            current.setFkUser(currentUser); 
+            validated = false;
+        }
+        // Poem Validation
+        current.setValidated(validated);
+
         
         selectedItemIndex = -1;
-        return "poem/Create";
+        return "Author/poem/Create";
     }
 
     public String create() {

@@ -6,6 +6,7 @@
 package src.facades;
 
 import java.util.List;
+import src.entities.User;
 import javax.persistence.EntityManager;
 
 /**
@@ -59,6 +60,12 @@ public abstract class AbstractFacade<T> {
         cq.select(getEntityManager().getCriteriaBuilder().count(rt));
         javax.persistence.Query q = getEntityManager().createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
+    }
+    
+    public User getCurrentUser(String username)
+    {
+        List results = getEntityManager().createNamedQuery("User.findByUsername").setParameter("username", username).getResultList();       
+        return (User) results.get(0);
     }
     
 }
