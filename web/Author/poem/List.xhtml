@@ -3,14 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="body">
             
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="display-4"> <h:outputText value="#{bundle.ListPoemTitle}"></h:outputText></h1>
+                    <h1 class="display-4">Your poems</h1>
                     <hr/>
                     
                     <h:form styleClass="jsfcrud_list_form">
@@ -19,54 +20,33 @@
                         </h:panelGroup>
                         <h:outputText escape="false" value="#{bundle.ListPoemEmpty}" rendered="#{poemController.poemListByUser.rowCount == 0}"/>
                         <h:panelGroup rendered="#{poemController.poemListByUser.rowCount > 0}">
-                           <h:dataTable value="#{poemController.poemListByUser}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="#{bundle.ListPoemTitle_pkPoem}"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.pkPoem}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="#{bundle.ListPoemTitle_title}"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.title}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="#{bundle.ListPoemTitle_content}"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.content}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="#{bundle.ListPoemTitle_creationDate}"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.creationDate}">
-                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                                    </h:outputText>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="#{bundle.ListPoemTitle_validated}"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.validated}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="#{bundle.ListPoemTitle_fkUser}"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.fkUser}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="&nbsp;"/>
-                                    </f:facet>
-                                    <h:commandLink action="#{poemController.prepareView}" value="#{bundle.ListPoemViewLink}"/>
-                                    <h:outputText value=" "/>
-                                    <h:commandLink action="#{poemController.prepareEdit}" value="#{bundle.ListPoemEditLink}"/>
-                                    <h:outputText value=" "/>
-                                    <h:commandLink action="#{poemController.destroy}" value="#{bundle.ListPoemDestroyLink}"/>
+                           <h:dataTable value="#{poemController.poemListByUser}" var="item" style="width: 100%;">
+                               <h:column>
+                                    <div class="card #{item.validated}">
+                                        <div class="card-body">
+                                            <h5 class="card-title">#{item.title}</h5>
+                                            <p><i>#{item.content}</i></p>
+                                            <hr/>
+                                            <p class="card-text float-left">
+                                                <small class="text-muted">
+                                                    Created on 
+                                                    <h:outputText value="#{item.creationDate}">
+                                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                                    </h:outputText>
+                                                     at 
+                                                    <h:outputText value="#{item.creationDate}">
+                                                        <f:convertDateTime pattern="HH:mm:ss" />
+                                                    </h:outputText>
+                                                </small>
+                                            </p>
+                                            <h:commandLink class="btn btn-danger btn-sm float-right" action="#{poemController.destroy}" value="#{bundle.ListPoemDestroyLink}"/>
+                                            <h:outputText class="float-right" value="&nbsp;"/>
+                                            <h:commandLink class="btn btn-info btn-sm float-right" action="#{poemController.prepareEdit}" value="#{bundle.ListPoemEditLink}"/>
+                                            <h:outputText class="float-right" value="&nbsp;"/>
+                                            <h:commandLink class="btn btn-primary btn-sm float-right" action="#{poemController.prepareView}" value="#{bundle.ListPoemViewLink}"/>
+                                        </div>
+                                    </div>
+                                  <br/>
                                 </h:column>
                             </h:dataTable>
                         </h:panelGroup>
