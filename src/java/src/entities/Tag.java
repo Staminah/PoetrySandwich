@@ -102,12 +102,15 @@ public class Tag implements Serializable {
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Tag)) {
+            System.out.println("equals not");
             return false;
         }
         Tag other = (Tag) object;
         if ((this.pkTag == null && other.pkTag != null) || (this.pkTag != null && !this.pkTag.equals(other.pkTag))) {
+            System.out.println("equals maybe");
             return false;
         }
+        System.out.println("equals");
         return true;
     }
 

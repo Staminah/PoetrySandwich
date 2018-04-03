@@ -43,6 +43,7 @@ public class PoemController implements Serializable {
     }
 
     private PoemFacade getFacade() {
+        System.out.println("POEM CONTROLLER FACADE");
         return ejbFacade;
     }
 
@@ -90,10 +91,12 @@ public class PoemController implements Serializable {
 
     public String create() {
         try {
+            System.out.println("POEM CONTROLLER CREATE");
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PoemCreated"));
             return prepareCreate();
         } catch (Exception e) {
+            System.out.println("POEM CONTROLLER FAIL");
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }

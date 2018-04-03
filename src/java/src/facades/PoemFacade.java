@@ -5,6 +5,7 @@
  */
 package src.facades;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,15 @@ public class PoemFacade extends AbstractFacade<Poem> {
 
     public PoemFacade() {
         super(Poem.class);
+        System.out.println("POEM FACADE");
+    }
+    
+    public List<Poem> getPoemsByTitle (String title){
+        return em.createNamedQuery("Poem.findByTitle").setParameter("title", title).getResultList();
+    }
+    
+    public List<Poem> getPoemsByTag (String tag){
+        return em.createNamedQuery("Poem.findByTag").setParameter("tag", tag).getResultList();
     }
     
 }

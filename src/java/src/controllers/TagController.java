@@ -181,6 +181,7 @@ public class TagController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
+        System.out.println("TAG CONTROLLER AVAILABLE");
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
     }
 

@@ -41,6 +41,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Poem.findAll", query = "SELECT p FROM Poem p")
     , @NamedQuery(name = "Poem.findByPkPoem", query = "SELECT p FROM Poem p WHERE p.pkPoem = :pkPoem")
     , @NamedQuery(name = "Poem.findByTitle", query = "SELECT p FROM Poem p WHERE p.title = :title")
+    , @NamedQuery(name = "Poem.findByTag", query = "SELECT p FROM Poem p INNER JOIN p.tagCollection tag WHERE tag.name = :tag")
     , @NamedQuery(name = "Poem.findByCreationDate", query = "SELECT p FROM Poem p WHERE p.creationDate = :creationDate")
     , @NamedQuery(name = "Poem.findByValidated", query = "SELECT p FROM Poem p WHERE p.validated = :validated")})
 public class Poem implements Serializable {
@@ -80,13 +81,16 @@ public class Poem implements Serializable {
     private User fkUser;
 
     public Poem() {
+        System.out.println("POEM");
     }
 
     public Poem(Integer pkPoem) {
+        System.out.println("POEM INT");
         this.pkPoem = pkPoem;
     }
 
     public Poem(Integer pkPoem, String title, String content, Date creationDate, boolean validated) {
+        System.out.println("POEM EVERYTHING");
         this.pkPoem = pkPoem;
         this.title = title;
         this.content = content;

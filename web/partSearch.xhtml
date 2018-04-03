@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Search</title>
+    </h:head>
+    <h:body>
+        <h3>Part Search</h3>
+        <h:form>
+            <h:selectOneRadio id="searchBy" value="#{searchBean.searchBy}">
+                <f:selectItem itemLabel="By Peom title" itemValue="PoemTitle"></f:selectItem>
+                <f:selectItem itemLabel="By Poem tag" itemValue="PoemTag"></f:selectItem>
+            </h:selectOneRadio>
+            <h:inputText id="keyword" value="#{searchBean.keyword}"></h:inputText>
+            <h:commandButton id="search" value="Search" action="#{searchBean.getPoems}"></h:commandButton>
+        </h:form>
+        <div>
+            Search Results of '
+            <h:outputText value="#{searchBean.keyword}"></h:outputText>', 
+            by
+            <h:outputText value="#{searchBean.searchBy}">
+            </h:outputText>
+        </div>
+
+        <h:dataTable id="products" value="#{searchBean.poems}" var="poem" rendered="#{searchBean.searchBy eq 'PoemTitle'}">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Poem title"></h:outputText>
+                </f:facet>
+                <h:outputText value="#{poem.title}"></h:outputText>
+            </h:column>
+        </h:dataTable>
+        
+        <h:dataTable id="parts" value="#{searchBean.poems}" var="poem" rendered="#{searchBean.searchBy eq 'PoemTag'}">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Poem tag"></h:outputText>
+                </f:facet>
+                <h:outputText value="#{poem.title}"></h:outputText>
+            </h:column>
+        </h:dataTable>
+    </h:body>
+</html>
+
