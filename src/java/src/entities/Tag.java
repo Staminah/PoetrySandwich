@@ -116,7 +116,7 @@ public class Tag implements Serializable {
 
     @Override
     public String toString() {
-        return "src.entities.Tag[ pkTag=" + pkTag + " ]";
+        return name;
     }
     
 }

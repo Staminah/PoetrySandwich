@@ -181,7 +181,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "src.entities.User[ pkUser=" + pkUser + " ]";
+        return username;
     }
     
 }
