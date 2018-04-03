@@ -38,6 +38,11 @@
                                     </h:selectOneMenu>
                                 </c:if>
                                 
+                                <h:outputLabel value="#{bundle.CreateTagLabel_name}" for="tagCollection" />
+                                <h:selectManyMenu id="tagCollection" value="#{poemController.selected.tagCollection}" title="#{bundle.CreateTagTitle}" required="true" requiredMessage="#{bundle.CreateTagRequiredMessage_pkTag}">
+                                    <f:selectItems value="#{tagController.getItemsAvailableSelectMany()}"/>
+                                </h:selectManyMenu>
+                                
                             </h:panelGrid>
                             <br />
                             <h:commandLink action="#{poemController.create}" value="#{bundle.CreatePoemSaveLink}" />
