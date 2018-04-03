@@ -72,6 +72,15 @@ public class PoemController implements Serializable {
         recreateModel();
         return "List";
     }
+    
+    public DataModel getPoemListByUser(){
+        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+        HttpServletRequest request = (HttpServletRequest)context.getRequest();
+        User currentUser = getFacade().getCurrentUser(request.getRemoteUser());
+        
+        return new ListDataModel(getFacade().getPoemByUser(currentUser));
+        
+    }
 
     public String prepareView() {
         current = (Poem) getItems().getRowData();
@@ -83,16 +92,16 @@ public class PoemController implements Serializable {
         current = new Poem();
         // Creation Date
         current.setCreationDate(new Date());
-        // User FacesContext.getCurrentInstance().getExternalContext().getRemoteUser()
+        // User 
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         HttpServletRequest request = (HttpServletRequest)context.getRequest();
         User currentUser = getFacade().getCurrentUser(request.getRemoteUser());
         
-        boolean validated = true;
+        char validated = 'v';
         
         if(!request.isUserInRole("ADMIN")){
             current.setFkUser(currentUser); 
-            validated = false;
+            validated = 'p';
         }
         // Poem Validation
         current.setValidated(validated);
@@ -177,6 +186,7 @@ public class PoemController implements Serializable {
     }
 
     public DataModel getItems() {
+        recreateModel();
         if (items == null) {
             items = getPagination().createPageDataModel();
         }

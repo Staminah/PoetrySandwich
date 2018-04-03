@@ -42,7 +42,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Poem.findByPkPoem", query = "SELECT p FROM Poem p WHERE p.pkPoem = :pkPoem")
     , @NamedQuery(name = "Poem.findByTitle", query = "SELECT p FROM Poem p WHERE p.title = :title")
     , @NamedQuery(name = "Poem.findByCreationDate", query = "SELECT p FROM Poem p WHERE p.creationDate = :creationDate")
-    , @NamedQuery(name = "Poem.findByValidated", query = "SELECT p FROM Poem p WHERE p.validated = :validated")})
+    , @NamedQuery(name = "Poem.findByValidated", query = "SELECT p FROM Poem p WHERE p.validated = :validated")
+    , @NamedQuery(name = "Poem.findByValidatedCount", query = "SELECT COUNT(p.pkPoem) FROM Poem p WHERE p.validated = :validated")
+    , @NamedQuery(name = "Poem.findByFkUser", query = "SELECT p FROM Poem p WHERE p.fkUser = :fkUser")})
 public class Poem implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -70,7 +72,7 @@ public class Poem implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "validated")
-    private boolean validated;
+    private char validated;
     @ManyToMany(mappedBy = "poemCollection")
     private Collection<Tag> tagCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPoem")
@@ -86,7 +88,7 @@ public class Poem implements Serializable {
         this.pkPoem = pkPoem;
     }
 
-    public Poem(Integer pkPoem, String title, String content, Date creationDate, boolean validated) {
+    public Poem(Integer pkPoem, String title, String content, Date creationDate, char validated) {
         this.pkPoem = pkPoem;
         this.title = title;
         this.content = content;
@@ -126,11 +128,11 @@ public class Poem implements Serializable {
         this.creationDate = creationDate;
     }
 
-    public boolean getValidated() {
+    public char getValidated() {
         return validated;
     }
 
-    public void setValidated(boolean validated) {
+    public void setValidated(char validated) {
         this.validated = validated;
     }
 
