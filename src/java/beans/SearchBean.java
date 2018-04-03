@@ -29,7 +29,7 @@ import src.facades.PoemFacade;
 public class SearchBean implements Serializable{
 
     private String keyword;
-    private String searchBy;
+    private String searchBy = "PoemTitle";
     @EJB
     private src.facades.PoemFacade poemFacade;
     
