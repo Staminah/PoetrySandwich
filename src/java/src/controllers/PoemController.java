@@ -71,7 +71,7 @@ public class PoemController implements Serializable {
 
     public String prepareList() {
         recreateModel();
-        return "List";
+        return "/faces/List.xhtml";
     }
     
     public DataModel getPoemListByUser(){
@@ -86,7 +86,7 @@ public class PoemController implements Serializable {
     public String prepareView() {
         current = (Poem) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "View";
+        return "/faces/View.xhtml";
     }
 
     public String prepareCreate() {
@@ -109,7 +109,7 @@ public class PoemController implements Serializable {
 
         
         selectedItemIndex = -1;
-        return "Author/poem/Create";
+        return "/faces/Author/poem/Create.xhtml";
     }
 
     public String create() {
@@ -128,14 +128,14 @@ public class PoemController implements Serializable {
     public String prepareEdit() {
         current = (Poem) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "Edit";
+        return "/faces/Edit.xhtml";
     }
 
     public String update() {
         try {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PoemUpdated"));
-            return "View";
+            return "/faces/View.xhtml";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -148,7 +148,7 @@ public class PoemController implements Serializable {
         performDestroy();
         recreatePagination();
         recreateModel();
-        return "List";
+        return "/faces/List.xhtml";
     }
 
     public String destroyAndView() {
@@ -156,11 +156,11 @@ public class PoemController implements Serializable {
         recreateModel();
         updateCurrentItem();
         if (selectedItemIndex >= 0) {
-            return "View";
+            return "/faces/View.xhtml";
         } else {
             // all items were removed - go back to list
             recreateModel();
-            return "List";
+            return "/faces/List.xhtml";
         }
     }
 
@@ -207,13 +207,13 @@ public class PoemController implements Serializable {
     public String next() {
         getPagination().nextPage();
         recreateModel();
-        return "List";
+        return "/faces/List.xhtml";
     }
 
     public String previous() {
         getPagination().previousPage();
         recreateModel();
-        return "List";
+        return "/faces/List.xhtml";
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
