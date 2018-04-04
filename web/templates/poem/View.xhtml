@@ -10,42 +10,37 @@
             
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="display-4"><h:outputText value="#{bundle.ViewPoemTitle}"></h:outputText></h1>
+                    <h1 class="display-4"><h:outputText value="#{poemController.selected.title}"></h:outputText></h1>
                     <hr/>
+                    <div>
+                        <small class="text-muted">
+                            Created on 
+                            <h:outputText value="#{poemController.selected.creationDate}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                             at 
+                            <h:outputText value="#{poemController.selected.creationDate}">
+                                <f:convertDateTime pattern="HH:mm:ss" />
+                            </h:outputText>
+                             by
+                             <h:outputText value="#{poemController.selected.fkUser.username}"></h:outputText>
+                        </small>
+                    </div>
+                    
                     
                     <h:panelGroup id="messagePanel" layout="block">
                         <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                     </h:panelGroup>
-                    <h:form>
+                    
+                    <h:form class="poem-content">
                         <h:panelGrid columns="2">
-                            <h:outputText value="#{bundle.ViewPoemLabel_pkPoem}"/>
-                            <h:outputText value="#{poemController.selected.pkPoem}" title="#{bundle.ViewPoemTitle_pkPoem}"/>
-                            <h:outputText value="#{bundle.ViewPoemLabel_title}"/>
-                            <h:outputText value="#{poemController.selected.title}" title="#{bundle.ViewPoemTitle_title}"/>
-                            <h:outputText value="#{bundle.ViewPoemLabel_content}"/>
                             <h:outputText value="#{poemController.selected.content}" title="#{bundle.ViewPoemTitle_content}"/>
-                            <h:outputText value="#{bundle.ViewPoemLabel_creationDate}"/>
-                            <h:outputText value="#{poemController.selected.creationDate}" title="#{bundle.ViewPoemTitle_creationDate}">
-                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                            </h:outputText>
-                            <h:outputText value="#{bundle.ViewPoemLabel_validated}"/>
-                            <h:outputText value="#{poemController.selected.validated}" title="#{bundle.ViewPoemTitle_validated}"/>
-                            <h:outputText value="#{bundle.ViewPoemLabel_fkUser}"/>
-                            <h:outputText value="#{poemController.selected.fkUser}" title="#{bundle.ViewPoemTitle_fkUser}"/>
                         </h:panelGrid>
-                        <br />
-                        <h:commandLink action="#{poemController.destroyAndView}" value="#{bundle.ViewPoemDestroyLink}"/>
-                        <br />
-                        <br />
-                        <h:link outcome="Edit" value="#{bundle.ViewPoemEditLink}"/>
-                        <br />
-                        <h:commandLink action="#{poemController.prepareCreate}" value="#{bundle.ViewPoemCreateLink}" />
-                        <br />
-                        <h:commandLink action="#{poemController.prepareList}" value="#{bundle.ViewPoemShowAllLink}"/>
                     </h:form>
                     
                     <!-- New Comment -->
-                    <h:form class="comment-section" rendered="#{not empty request.remoteUser}">
+                    <h:form rendered="#{not empty request.remoteUser}">
+                        <h2 class="comment-section">Add Comment</h2>
                         <div class="form-group">
                             <label for="comment_area">Your comment :</label>
                             <h:inputTextarea id="comment_area" value="#{poemController.tempComment}" class="form-control" rows="4" />
@@ -56,39 +51,39 @@
                     </h:form>
                     
                     <!-- Comments section -->
-                    <div id="comments_uers">
-                        <h:outputText escape="false" value="#{bundle.ListCommentEmpty}" rendered="#{poemController.selected.commentCollection.size() == 0}"/>
-                        <h:panelGroup rendered="#{poemController.selected.commentCollection.size() > 0}">
-                            <h:dataTable value="#{poemController.sortedCommentCollection}" var="item" style="width: 100%;">
-                               <h:column>
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <p><i>#{item.content}</i></p>
-                                            <hr/>
-                                            <p class="card-text float-left">
-                                                <small class="text-muted">
-                                                    Created on 
-                                                    <h:outputText value="#{item.creationDate}">
-                                                        <f:convertDateTime pattern="dd/MM/yyyy" />
-                                                    </h:outputText>
-                                                     at 
-                                                    <h:outputText value="#{item.creationDate}">
-                                                        <f:convertDateTime pattern="HH:mm:ss" />
-                                                    </h:outputText>
-                                                     by
-                                                     <h:outputText value="#{item.fkUser.username}"></h:outputText>
-                                                </small>
-                                            </p>
-                                            <h:form>
-                                                <h:commandLink rendered="#{item.fkUser.username == request.remoteUser}" class="btn btn-danger btn-sm float-right" action="#{poemController.removeComment(item)}" value="#{bundle.ViewCommentDestroyLink}"/>
-                                            </h:form>
-                                        </div>
+                    <h2 class="comment-section">Comments</h2>
+                    <h:outputText escape="false" value="#{bundle.ListCommentEmpty}" rendered="#{poemController.selected.commentCollection.size() == 0}"/>
+                    <h:panelGroup rendered="#{poemController.selected.commentCollection.size() > 0}">
+                        <h:dataTable value="#{poemController.sortedCommentCollection}" var="item" style="width: 100%;">
+                           <h:column>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p><i>#{item.content}</i></p>
+                                        <hr/>
+                                        <p class="card-text float-left">
+                                            <small class="text-muted">
+                                                Created on 
+                                                <h:outputText value="#{item.creationDate}">
+                                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                                </h:outputText>
+                                                 at 
+                                                <h:outputText value="#{item.creationDate}">
+                                                    <f:convertDateTime pattern="HH:mm:ss" />
+                                                </h:outputText>
+                                                 by
+                                                 <h:outputText value="#{item.fkUser.username}"></h:outputText>
+                                            </small>
+                                        </p>
+                                        <h:form>
+                                            <h:commandLink rendered="#{item.fkUser.username == request.remoteUser}" class="btn btn-danger btn-sm float-right" action="#{poemController.removeComment(item)}" value="#{bundle.ViewCommentDestroyLink}"/>
+                                        </h:form>
                                     </div>
-                                  <br/>
-                                </h:column>
-                            </h:dataTable>
-                        </h:panelGroup>
-                    </div>
+                                </div>
+                              <br/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:panelGroup>
+
                 </div>
             </div>
 

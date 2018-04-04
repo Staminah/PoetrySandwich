@@ -18,38 +18,43 @@
                             <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                         </h:panelGroup>
                         <h:form>
-                            <h:panelGrid columns="2">
+                            <div class="form-group"> 
                                 <h:outputLabel value="#{bundle.CreatePoemLabel_title}" for="title" />
-                                <h:inputText id="title" value="#{poemController.selected.title}" title="#{bundle.CreatePoemTitle_title}" required="true" requiredMessage="#{bundle.CreatePoemRequiredMessage_title}"/>
+                                <h:inputText class="form-control" id="title" value="#{poemController.selected.title}" title="#{bundle.CreatePoemTitle_title}" required="true" requiredMessage="#{bundle.CreatePoemRequiredMessage_title}"/>
+                            </div>
+                            <div class="form-group"> 
                                 <h:outputLabel value="#{bundle.CreatePoemLabel_content}" for="content" />
-                                <h:inputTextarea rows="4" cols="30" id="content" value="#{poemController.selected.content}" title="#{bundle.CreatePoemTitle_content}" required="true" requiredMessage="#{bundle.CreatePoemRequiredMessage_content}"/>
-                                    
-                                <c:if test="#{request.isUserInRole('ADMIN')}">
+                                <h:inputTextarea class="form-control" rows="4" cols="30" id="content" value="#{poemController.selected.content}" title="#{bundle.CreatePoemTitle_content}" required="true" requiredMessage="#{bundle.CreatePoemRequiredMessage_content}"/>
+                            </div>
+                            
+                            <c:if test="#{request.isUserInRole('ADMIN')}">
+                                <div class="form-group">
                                     <h:outputLabel value="#{bundle.CreatePoemLabel_creationDate}" for="creationDate" />
-                                    <h:inputText id="creationDate" value="#{poemController.selected.creationDate}" title="#{bundle.CreatePoemTitle_creationDate}" required="true" requiredMessage="#{bundle.CreatePoemRequiredMessage_creationDate}">
+                                    <h:inputText  class="form-control" id="creationDate" value="#{poemController.selected.creationDate}" title="#{bundle.CreatePoemTitle_creationDate}" required="true" requiredMessage="#{bundle.CreatePoemRequiredMessage_creationDate}">
                                         <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                                     </h:inputText>
+                                </div>
+                                <div class="form-group">
                                     <h:outputLabel value="#{bundle.CreatePoemLabel_validated}" for="validated" />
-                                    <h:inputText id="validated" value="#{poemController.selected.validated}" title="#{bundle.CreatePoemTitle_validated}" required="true" requiredMessage="#{bundle.CreatePoemRequiredMessage_validated}"/>
-                                    
+                                    <h:inputText class="form-control" id="validated" value="#{poemController.selected.validated}" title="#{bundle.CreatePoemTitle_validated}" required="true" requiredMessage="#{bundle.CreatePoemRequiredMessage_validated}"/>
+                                </div>
+                                <div class="form-group">
                                     <h:outputLabel value="#{bundle.CreatePoemLabel_fkUser}" for="fkUser" />
-                                    <h:selectOneMenu id="fkUser" value="#{poemController.selected.fkUser}" title="#{bundle.CreatePoemTitle_fkUser}" required="true" requiredMessage="#{bundle.CreatePoemRequiredMessage_fkUser}">
+                                    <h:selectOneMenu class="form-control" id="fkUser" value="#{poemController.selected.fkUser}" title="#{bundle.CreatePoemTitle_fkUser}" required="true" requiredMessage="#{bundle.CreatePoemRequiredMessage_fkUser}">
                                         <f:selectItems value="#{userController.itemsAvailableSelectOne}"/>
                                     </h:selectOneMenu>
-                                </c:if>
-                                
+                                </div>
+                            </c:if>
+                            <div class="form-group">
                                 <h:outputLabel value="#{bundle.CreateTagLabel_name}" for="tagCollection" />
-                                <h:selectManyMenu class="selectManyMenu" id="tagCollection" value="#{poemController.selected.tagCollection}" title="#{bundle.CreateTagTitle}" required="true" requiredMessage="#{bundle.CreateTagRequiredMessage_pkTag}">
+                                <h:selectManyMenu class="form-control selectManyMenu" id="tagCollection" value="#{poemController.selected.tagCollection}" title="#{bundle.CreateTagTitle}" required="true" requiredMessage="#{bundle.CreateTagRequiredMessage_pkTag}">
                                     <f:selectItems value="#{tagController.getItemsAvailableSelectMany()}"/>
                                     <f:converter converterId="tagConverter" />
                                 </h:selectManyMenu>
-                                
-                            </h:panelGrid>
+                            </div>
                             <br />
-                            <h:commandLink action="#{poemController.create}" value="#{bundle.CreatePoemSaveLink}" />
+                            <h:commandLink class="btn btn-success" action="#{poemController.create}" value="#{bundle.CreatePoemSaveLink}" />
                             <br />
-                            <br />
-                            <h:commandLink action="#{poemController.prepareList}" value="#{bundle.CreatePoemShowAllLink}" immediate="true"/>
                         </h:form>
                     
                 </div>

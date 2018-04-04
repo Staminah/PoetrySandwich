@@ -10,7 +10,6 @@ import src.facades.PoemFacade;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -28,8 +27,6 @@ import javax.faces.context.ExternalContext;
 import javax.servlet.http.HttpServletRequest;
 
 import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Named("poemController")
 @SessionScoped
