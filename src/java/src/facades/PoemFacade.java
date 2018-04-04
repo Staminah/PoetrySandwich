@@ -49,6 +49,11 @@ public class PoemFacade extends AbstractFacade<Poem> {
         return getEntityManager().createNamedQuery("Poem.findByFkUser").setParameter("fkUser", fkUser).getResultList();
     }
     
+    public List<Poem> getPoemByValidationState(char state)
+    {
+        return getEntityManager().createNamedQuery("Poem.findByValidated").setParameter("validated", state).getResultList();
+    }
+    
     @Override
     public List<Poem> findRange(int[] range) {
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();

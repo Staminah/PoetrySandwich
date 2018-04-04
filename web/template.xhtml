@@ -54,6 +54,9 @@
 
               </li>-->
               <li class="nav-item">
+                <h:link outcome="/faces/Editor/poem/List.xhtml" rendered="#{request.isUserInRole('EDITOR') || request.isUserInRole('ADMIN')}" class="nav-link" ><i class="material-icons">check_circle</i>Moderation</h:link>
+              </li>
+              <li class="nav-item">
                 <h:link outcome="/faces/Author/poem/List.xhtml" rendered="#{not empty request.remoteUser}" class="nav-link" ><i class="material-icons">list</i>My Poems</h:link>
               </li>
               <li class="nav-item">

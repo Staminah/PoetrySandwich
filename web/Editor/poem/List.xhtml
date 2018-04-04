@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="body">
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="display-4">Poem Moderation</h1>
+                    <hr/>
+                    
+                    <h:form styleClass="jsfcrud_list_form">
+                        <h:panelGroup id="messagePanel" layout="block">
+                            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                        </h:panelGroup>
+                        <h:outputText escape="false" value="#{bundle.ListPoemEmpty}" rendered="#{poemController.getPoemByValidationState('p').rowCount == 0}"/>
+                        <h:panelGroup rendered="#{poemController.getPoemByValidationState('p').rowCount > 0}">
+                           <h:dataTable value="#{poemController.getPoemByValidationState('p')}" var="item" style="width: 100%;">
+                               <h:column>
+                                    <div class="card #{item.validated}">
+                                        <div class="card-body">
+                                            <h5 class="card-title">#{item.title}</h5>
+                                            <p><i>#{item.content}</i></p>
+                                            <hr/>
+                                            <p class="card-text float-left">
+                                                <small class="text-muted">
+                                                    Created on 
+                                                    <h:outputText value="#{item.creationDate}">
+                                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                                    </h:outputText>
+                                                     at 
+                                                    <h:outputText value="#{item.creationDate}">
+                                                        <f:convertDateTime pattern="HH:mm:ss" />
+                                                    </h:outputText>
+                                                </small>
+                                            </p>
+                                            <h:commandLink class="btn btn-success btn-sm float-right" action="#{poemController.updateValidationState(item, 'v')}" value="#{bundle.ListModerationPoemValidated}"/>
+                                            <h:outputText class="float-right" value="&nbsp;"/>
+                                            <h:commandLink class="btn btn-danger btn-sm float-right" action="#{poemController.updateValidationState(item, 'd')}" value="#{bundle.ListModerationPoemDeclined}"/>
+                                            <h:outputText class="float-right" value="&nbsp;"/>
+                                        </div>
+                                    </div>
+                                  <br/>
+                                </h:column>
+                            </h:dataTable>
+                        </h:panelGroup>
+                        <br />
+                    </h:form>
+                    
+                </div>
+            </div>
+           
+        </ui:define>
+    </ui:composition>
+
+</html>
