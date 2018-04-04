@@ -192,7 +192,7 @@ public class Poem implements Serializable {
 
     @Override
     public String toString() {
-        return "src.entities.Poem[ pkPoem=" + pkPoem + " ]";
+        return "src.entities.Poem[ pkPoem=" + pkPoem + " " + this.title + " ]";
     }
     
 }

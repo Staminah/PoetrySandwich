@@ -88,6 +88,29 @@ public class PoemController implements Serializable {
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "/faces/templates/poem/View.xhtml";
     }
+    
+    public DataModel getPoemByValidationState(char state){
+        return new ListDataModel(getFacade().getPoemByValidationState(state)); 
+    }
+    
+    public String updateValidationState(Poem poem, char value) {        
+        
+        poem.setValidated(value);
+        System.out.println("---------------POPOPO----------------------");
+        System.out.println(poem);
+        System.out.println(value);
+        System.out.println(poem.getValidated());
+        System.out.println("---------------POPOPO----------------------");
+        
+        try {
+            getFacade().edit(poem);
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PoemValidationStateUpdated"));
+            return "/faces/Editor/poem/List.xhtml";
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            return null;
+        }
+    }
 
     public String prepareCreate() {
         current = new Poem();
