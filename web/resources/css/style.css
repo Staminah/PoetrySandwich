@@ -79,3 +79,16 @@ body {
     height: 350px;
     width: 150px;
 }
+
+.v {
+    border-color: #28a745 !important;
+}
+
+.d {
+    border-color: #dc3545 !important;
+}
+
+.p {
+    border-color: #ffc107 !important;
+}
+
