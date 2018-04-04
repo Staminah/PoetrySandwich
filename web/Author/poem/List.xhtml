@@ -36,7 +36,12 @@
                                                      at 
                                                     <h:outputText value="#{item.creationDate}">
                                                         <f:convertDateTime pattern="HH:mm:ss" />
-                                                    </h:outputText>
+                                                    </h:outputText><br/>
+                                                    Tags : 
+                                                    <h:outputText escape="false" value="#{bundle.ListTagEmpty}" rendered="#{item.tagCollection.size() == 0}"/>
+                                                    <ui:repeat value="#{item.tagCollection}" var="tag">
+                                                        <h:outputText value="#{tag.name} "/>
+                                                    </ui:repeat>
                                                 </small>
                                             </p>
                                             <h:commandLink class="btn btn-danger btn-sm float-right" action="#{poemController.destroyItem(item)}" value="#{bundle.ListPoemDestroyLink}"/>

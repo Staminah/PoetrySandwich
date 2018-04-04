@@ -38,7 +38,12 @@
                                                         <f:convertDateTime pattern="HH:mm:ss" />
                                                     </h:outputText>
                                                      by 
-                                                    <h:outputText value="#{item.fkUser.username}" />
+                                                    <h:outputText value="#{item.fkUser.username}" /><br/>
+                                                    Tags : 
+                                                    <h:outputText escape="false" value="#{bundle.ListTagEmpty}" rendered="#{item.tagCollection.size() == 0}"/>
+                                                    <ui:repeat value="#{item.tagCollection}" var="tag">
+                                                        <h:outputText value="#{tag.name} "/>
+                                                    </ui:repeat>
                                                 </small>
                                             </p>
                                             <h:commandLink class="btn btn-success btn-sm float-right" action="#{poemController.updateValidationState(item, 'v')}" value="#{bundle.ListModerationPoemValidated}"/>

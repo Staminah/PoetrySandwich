@@ -40,8 +40,16 @@ public class PoemFacade extends AbstractFacade<Poem> {
         return em.createNamedQuery("Poem.findByTitle").setParameter("title", title).getResultList();
     }
     
+    public List<Poem> getValidatedPoemsByTitle (String title){
+        return em.createNamedQuery("Poem.findValidatedByTitle").setParameter("title", title).getResultList();
+    }
+    
     public List<Poem> getPoemsByTag (String tag){
         return em.createNamedQuery("Poem.findByTag").setParameter("tag", tag).getResultList();
+    }
+    
+    public List<Poem> getValidatedPoemsByTag (String tag){
+        return em.createNamedQuery("Poem.findValidatedByTag").setParameter("tag", tag).getResultList();
     }
     
     public List<Poem> getPoemByUser(User fkUser)

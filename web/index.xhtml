@@ -74,7 +74,12 @@
                                                     </h:outputText>
                                                      by 
                                                     <h:outputText value="#{item.fkUser.username}">
-                                                    </h:outputText>
+                                                    </h:outputText><br/>
+                                                    Tags : 
+                                                    <h:outputText escape="false" value="#{bundle.ListTagEmpty}" rendered="#{item.tagCollection.size() == 0}"/>
+                                                    <ui:repeat value="#{item.tagCollection}" var="tag">
+                                                        <h:outputText value="#{tag.name} "/>
+                                                    </ui:repeat>
                                                 </small>
                                             </p>
                                             <c:if test="#{request.isUserInRole('ADMIN')}">

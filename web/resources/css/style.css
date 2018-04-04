@@ -102,3 +102,6 @@ body {
     border-color: #ffc107 !important;
 }
 
+.search-select {
+    border-radius: .25rem .0rem .0rem .25rem !important;
+}

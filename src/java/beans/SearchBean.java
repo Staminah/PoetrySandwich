@@ -55,13 +55,13 @@ public class SearchBean implements Serializable{
         }
         else {
             if(searchBy.equals("PoemTitle")) {
-                poems = poemFacade.getPoemsByTitle(keyword);
+                poems = poemFacade.getValidatedPoemsByTitle("%" + keyword + "%");
             }
             else {
-                poems = poemFacade.getPoemsByTag(keyword);
+                poems = poemFacade.getValidatedPoemsByTag("%" + keyword + "%");
             }
         }
-           
+
         return poems;
     }
 }
