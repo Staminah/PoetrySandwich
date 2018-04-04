@@ -43,6 +43,47 @@
                         <br />
                         <h:commandLink action="#{poemController.prepareList}" value="#{bundle.ViewPoemShowAllLink}"/>
                     </h:form>
+                    
+                    <!-- New Comment -->
+                    <h:form class="comment-section" rendered="#{not empty request.remoteUser}">
+                        <div class="form-group">
+                            <label for="comment_area">Your comment :</label>
+                            <h:inputTextarea id="comment_area" value="#{poemController.tempComment}" class="form-control" rows="4" />
+                        </div>
+                        <h:commandLink class="btn btn-info" action="#{poemController.addComment(request.remoteUser)}">
+                            <i class="material-icons">comment</i>Comment
+                        </h:commandLink>
+                    </h:form>
+                    
+                    <!-- Comments section -->
+                    <h:outputText escape="false" value="#{bundle.ListCommentEmpty}" rendered="#{poemController.selected.commentCollection.size() == 0}"/>
+                        <h:panelGroup rendered="#{poemController.selected.commentCollection.size() > 0}">
+                           <h:dataTable value="#{poemController.selected.commentCollection}" var="item" style="width: 100%;">
+                               <h:column>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <p><i>#{item.content}</i></p>
+                                            <hr/>
+                                            <p class="card-text float-left">
+                                                <small class="text-muted">
+                                                    Created on 
+                                                    <h:outputText value="#{poemController.selected.creationDate}">
+                                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                                    </h:outputText>
+                                                     at 
+                                                    <h:outputText value="#{poemController.selected.creationDate}">
+                                                        <f:convertDateTime pattern="HH:mm:ss" />
+                                                    </h:outputText>
+                                                     by
+                                                    <h:outputText value="#{poemController.selected.fkUser.username}"></h:outputText>
+                                                </small>
+                                            </p>
+                                        </div>
+                                    </div>
+                                  <br/>
+                                </h:column>
+                            </h:dataTable>
+                        </h:panelGroup>
                 </div>
             </div>
 

@@ -2,6 +2,8 @@ package src.controllers;
 
 import src.entities.Poem;
 import src.entities.User;
+import src.entities.Comment;
+
 import src.controllers.util.JsfUtil;
 import src.controllers.util.PaginationHelper;
 import src.facades.PoemFacade;
@@ -34,6 +36,7 @@ public class PoemController implements Serializable {
     private src.facades.PoemFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private String tempComment = "";
 
     public PoemController() {
     }
@@ -190,6 +193,27 @@ public class PoemController implements Serializable {
             return null;
         }
     }
+    
+    public void addComment(String username)
+    {
+        Comment comment = new Comment();
+        
+        comment.setFkPoem(current);
+        current.addComment(comment);
+        
+        comment.setFkUser(getFacade().getCurrentUser(username));
+        comment.setContent(tempComment);
+        
+        tempComment = "";
+        
+        try {
+            getFacade().createComment(comment);
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CommentCreated"));
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+
+    }
 
     public String destroy() {
         current = (Poem) getItems().getRowData();
@@ -323,6 +347,14 @@ public class PoemController implements Serializable {
             }
         }
 
+    }
+    
+    public String getTempComment() {
+        return tempComment;
+    }
+
+    public void setTempComment(String comment) {
+        this.tempComment = comment;
     }
 
 }

@@ -7,6 +7,7 @@ package src.facades;
 
 import java.util.List;
 import src.entities.User;
+import src.entities.Comment;
 import javax.persistence.EntityManager;
 
 /**
@@ -66,6 +67,10 @@ public abstract class AbstractFacade<T> {
     {
         List results = getEntityManager().createNamedQuery("User.findByUsername").setParameter("username", username).getResultList();       
         return (User) results.get(0);
+    }
+    
+    public void createComment(Comment comment) {
+        getEntityManager().persist(comment);
     }
     
 }

@@ -169,6 +169,7 @@ public class Poem implements Serializable {
     public void setFkUser(User fkUser) {
         this.fkUser = fkUser;
     }
+   
 
     @Override
     public int hashCode() {
@@ -188,6 +189,11 @@ public class Poem implements Serializable {
             return false;
         }
         return true;
+    }
+    
+    public void addComment(Comment comment)
+    {
+        this.commentCollection.add(comment);
     }
 
     @Override
