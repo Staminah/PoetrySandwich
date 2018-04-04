@@ -9,6 +9,9 @@ import src.controllers.util.PaginationHelper;
 import src.facades.PoemFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -25,6 +28,8 @@ import javax.faces.context.ExternalContext;
 import javax.servlet.http.HttpServletRequest;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Named("poemController")
 @SessionScoped
@@ -37,6 +42,7 @@ public class PoemController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private String tempComment = "";
+    private ArrayList<Comment> sortedCommentCollection;
 
     public PoemController() {
     }
@@ -94,6 +100,8 @@ public class PoemController implements Serializable {
     
     public String prepareViewForItem(Poem item) {
         current = item;
+        sortedCommentCollection = new ArrayList<>(current.getCommentCollection());
+        sortedCommentCollection.sort(Comparator.comparing(Comment::getCreationDate).reversed());
         return "/faces/templates/poem/View.xhtml";
     }
 
@@ -206,6 +214,17 @@ public class PoemController implements Serializable {
         }
     }
     
+    public void removeComment(Comment comment){
+        
+        try {      
+            sortedCommentCollection.remove(comment);
+            getFacade().removeComment(comment);
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CommentDeleted"));
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+    }
+    
     public void addComment(String username)
     {
         Comment comment = new Comment();
@@ -215,9 +234,12 @@ public class PoemController implements Serializable {
         
         comment.setFkUser(getFacade().getCurrentUser(username));
         comment.setContent(tempComment);
+        comment.setCreationDate(new Date());
         
+        sortedCommentCollection.add(0, comment);        
+  
         tempComment = "";
-        
+
         try {
             getFacade().createComment(comment);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CommentCreated"));
@@ -367,6 +389,14 @@ public class PoemController implements Serializable {
 
     public void setTempComment(String comment) {
         this.tempComment = comment;
+    }
+    
+    public ArrayList<Comment> getSortedCommentCollection() {
+        return sortedCommentCollection;
+    }
+
+    public void setSortedCommentCollection(ArrayList<Comment> list) {
+        this.sortedCommentCollection = list;
     }
 
 }

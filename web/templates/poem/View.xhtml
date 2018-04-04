@@ -56,9 +56,10 @@
                     </h:form>
                     
                     <!-- Comments section -->
-                    <h:outputText escape="false" value="#{bundle.ListCommentEmpty}" rendered="#{poemController.selected.commentCollection.size() == 0}"/>
+                    <div id="comments_uers">
+                        <h:outputText escape="false" value="#{bundle.ListCommentEmpty}" rendered="#{poemController.selected.commentCollection.size() == 0}"/>
                         <h:panelGroup rendered="#{poemController.selected.commentCollection.size() > 0}">
-                           <h:dataTable value="#{poemController.selected.commentCollection}" var="item" style="width: 100%;">
+                            <h:dataTable value="#{poemController.sortedCommentCollection}" var="item" style="width: 100%;">
                                <h:column>
                                     <div class="card">
                                         <div class="card-body">
@@ -67,23 +68,27 @@
                                             <p class="card-text float-left">
                                                 <small class="text-muted">
                                                     Created on 
-                                                    <h:outputText value="#{poemController.selected.creationDate}">
+                                                    <h:outputText value="#{item.creationDate}">
                                                         <f:convertDateTime pattern="dd/MM/yyyy" />
                                                     </h:outputText>
                                                      at 
-                                                    <h:outputText value="#{poemController.selected.creationDate}">
+                                                    <h:outputText value="#{item.creationDate}">
                                                         <f:convertDateTime pattern="HH:mm:ss" />
                                                     </h:outputText>
                                                      by
-                                                    <h:outputText value="#{poemController.selected.fkUser.username}"></h:outputText>
+                                                     <h:outputText value="#{item.fkUser.username}"></h:outputText>
                                                 </small>
                                             </p>
+                                            <h:form>
+                                                <h:commandLink rendered="#{item.fkUser.username == request.remoteUser}" class="btn btn-danger btn-sm float-right" action="#{poemController.removeComment(item)}" value="#{bundle.ViewCommentDestroyLink}"/>
+                                            </h:form>
                                         </div>
                                     </div>
                                   <br/>
                                 </h:column>
                             </h:dataTable>
                         </h:panelGroup>
+                    </div>
                 </div>
             </div>
 

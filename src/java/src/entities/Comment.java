@@ -6,6 +6,7 @@
 package src.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -46,6 +49,11 @@ public class Comment implements Serializable {
     @Size(min = 1, max = 65535)
     @Column(name = "content")
     private String content;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "creation_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date creationDate;
     @JoinColumn(name = "fk_user", referencedColumnName = "pk_user")
     @ManyToOne(optional = false)
     private User fkUser;
@@ -79,6 +87,14 @@ public class Comment implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
+    }
+    
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
     public User getFkUser() {

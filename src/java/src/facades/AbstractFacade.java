@@ -73,4 +73,8 @@ public abstract class AbstractFacade<T> {
         getEntityManager().persist(comment);
     }
     
+    public void removeComment(Comment comment) {
+        getEntityManager().remove(getEntityManager().merge(comment));
+    }
+    
 }
