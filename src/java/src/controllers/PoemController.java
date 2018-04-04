@@ -27,6 +27,7 @@ import javax.faces.context.ExternalContext;
 import javax.servlet.http.HttpServletRequest;
 
 import java.util.Date;
+import java.util.List;
 
 @Named("poemController")
 @SessionScoped
@@ -39,6 +40,9 @@ public class PoemController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private String tempComment = "";
+    private String searchContent = "";
+    private String searchFilter = "";
+    private List<Poem> searchedPoems;
     private ArrayList<Comment> sortedCommentCollection;
 
     public PoemController() {
@@ -275,6 +279,33 @@ public class PoemController implements Serializable {
             return "/faces/templates/poem/List.xhtml";
         }
     }
+    
+    public String searchPoem() {
+        searchedPoems = null;
+        
+        if (searchFilter.equals("") || searchContent.equals("") || searchFilter.equals("Filter")) {
+            searchedPoems = null;
+        }
+        else {
+            if (searchFilter.equals("Title")) {
+                searchedPoems = getFacade().getValidatedPoemsByTitle("%" + searchContent + "%");
+            }
+            else {
+                searchedPoems = getFacade().getValidatedPoemsByTag("%" + searchContent + "%");
+            }
+        }
+        
+        return "/faces/search.xhtml";
+    }
+    
+    public DataModel getSearchedPoems() {
+        if (searchedPoems != null) {
+            return new ListDataModel(searchedPoems);
+        }
+        else {
+            return null;
+        }
+    }
 
     private void performDestroy() {
         try {
@@ -395,5 +426,20 @@ public class PoemController implements Serializable {
     public void setSortedCommentCollection(ArrayList<Comment> list) {
         this.sortedCommentCollection = list;
     }
+    
+    public String getSearchContent() {
+        return searchContent;
+    }
+    
+    public void setSearchContent(String content) {
+        this.searchContent = content;
+    }
 
+    public String getSearchFilter() {
+        return searchFilter;
+    }
+    
+    public void setSearchFilter(String filter) {
+        this.searchFilter = filter;
+    }
 }

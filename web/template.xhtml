@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -48,19 +49,24 @@
                   <button class="btn btn-outline-light my-2 my-sm-0" ><i class="material-icons">search</i>Search</button>
                 </div>
             </form> -->
-            
-            <div class="input-group w-25">
-                <div class="input-group-prepend">
-                    <select class="custom-select search-select" id="inputGroupSelect04">
-                      <option selected="selected">Filter by...</option>
-                      <option value="1">Title</option>
-                      <option value="2">Tag</option>
-                    </select>
+            <h:form>
+                <div class="inline">
+                    <div class="input-group w-75 float-left">
+                        <div class="input-group-prepend">
+                            <h:selectOneMenu id="inputGroupSelect" class="custom-select search-select" value="#{poemController.searchFilter}">
+                                <f:selectItem itemLabel="Filter by..." itemValue="Filter"/> 
+                                <f:selectItem itemLabel="Title" itemValue="Title"/>
+                                <f:selectItem itemLabel="Tag" itemValue="Tag"/> 
+                            </h:selectOneMenu>
+                        </div>
+                        <h:inputText id="search_form" class="form-control" value="#{poemController.searchContent}"></h:inputText>
+                    </div>
+                    &nbsp;
+                    <h:commandLink class="float-right btn btn-outline-light my-2 my-sm-0" action="#{poemController.searchPoem}">
+                        <i class="material-icons">search</i>Search
+                    </h:commandLink>
                 </div>
-                <input id="search_form" class="form-control" type="text" placeholder="Search" aria-label="Search"></input>
-            </div>
-            &nbsp;
-            <button class="btn btn-outline-light my-2 my-sm-0" ><i class="material-icons">search</i>Search</button>
+            </h:form>
             
             <!-- <h:link class="btn btn-outline-light my-2 my-sm-0" outcome="/faces/search.xhtml"><i class="material-icons">search</i>Search</h:link> -->
 
