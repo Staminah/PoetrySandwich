@@ -39,14 +39,14 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "tb_poem")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Poem.findAll", query = "SELECT p FROM Poem p")
+    @NamedQuery(name = "Poem.findAll", query = "SELECT p FROM Poem p ORDER BY p.creationDate DESC")
     , @NamedQuery(name = "Poem.findByPkPoem", query = "SELECT p FROM Poem p WHERE p.pkPoem = :pkPoem")
     , @NamedQuery(name = "Poem.findByTitle", query = "SELECT p FROM Poem p WHERE p.title = :title")
     , @NamedQuery(name = "Poem.findByTag", query = "SELECT p FROM Poem p INNER JOIN p.tagCollection tag WHERE tag.name = :tag")
     , @NamedQuery(name = "Poem.findByCreationDate", query = "SELECT p FROM Poem p WHERE p.creationDate = :creationDate")
-    , @NamedQuery(name = "Poem.findByValidated", query = "SELECT p FROM Poem p WHERE p.validated = :validated")
+    , @NamedQuery(name = "Poem.findByValidated", query = "SELECT p FROM Poem p WHERE p.validated = :validated ORDER BY p.creationDate DESC")
     , @NamedQuery(name = "Poem.findByValidatedCount", query = "SELECT COUNT(p.pkPoem) FROM Poem p WHERE p.validated = :validated")
-    , @NamedQuery(name = "Poem.findByFkUser", query = "SELECT p FROM Poem p WHERE p.fkUser = :fkUser")})
+    , @NamedQuery(name = "Poem.findByFkUser", query = "SELECT p FROM Poem p WHERE p.fkUser = :fkUser ORDER BY p.creationDate DESC")})
 public class Poem implements Serializable {
 
     private static final long serialVersionUID = 1L;

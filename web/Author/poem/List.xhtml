@@ -22,7 +22,7 @@
                         <h:panelGroup rendered="#{poemController.poemListByUser.rowCount > 0}">
                            <h:dataTable value="#{poemController.poemListByUser}" var="item" style="width: 100%;">
                                <h:column>
-                                    <div class="card #{item.validated}">
+                                    <div class="card #{item.validated}-state">
                                         <div class="card-body">
                                             <h5 class="card-title">#{item.title}</h5>
                                             <p><i>#{item.content}</i></p>
@@ -39,11 +39,11 @@
                                                     </h:outputText>
                                                 </small>
                                             </p>
-                                            <h:commandLink class="btn btn-danger btn-sm float-right" action="#{poemController.destroy}" value="#{bundle.ListPoemDestroyLink}"/>
+                                            <h:commandLink class="btn btn-danger btn-sm float-right" action="#{poemController.destroyItem(item)}" value="#{bundle.ListPoemDestroyLink}"/>
                                             <h:outputText class="float-right" value="&nbsp;"/>
-                                            <h:commandLink class="btn btn-info btn-sm float-right" action="#{poemController.prepareEdit}" value="#{bundle.ListPoemEditLink}"/>
+                                            <h:commandLink class="btn btn-info btn-sm float-right" action="#{poemController.prepareEditForItem(item)}" value="#{bundle.ListPoemEditLink}"/>
                                             <h:outputText class="float-right" value="&nbsp;"/>
-                                            <h:commandLink class="btn btn-primary btn-sm float-right" action="#{poemController.prepareView}" value="#{bundle.ListPoemViewLink}"/>
+                                            <h:commandLink class="btn btn-primary btn-sm float-right" action="#{poemController.prepareViewForItem(item)}" value="#{bundle.ListPoemViewLink}"/>
                                         </div>
                                     </div>
                                   <br/>

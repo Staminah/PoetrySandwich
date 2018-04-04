@@ -78,14 +78,14 @@ body {
 /*Search Styles
 ------------------------------------------*/
 
-.v {
+.v-state {
     border-color: #28a745 !important;
 }
 
-.d {
+.d-state {
     border-color: #dc3545 !important;
 }
 
-.p {
+.p-state {
     border-color: #ffc107 !important;
 }

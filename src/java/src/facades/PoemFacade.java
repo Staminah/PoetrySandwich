@@ -58,12 +58,15 @@ public class PoemFacade extends AbstractFacade<Poem> {
         
         if(!request.isUserInRole("ADMIN")){
             q = getEntityManager().createNamedQuery("Poem.findByValidated").setParameter("validated", 'v');
-            q.setMaxResults(range[1] - range[0] + 1);
-            q.setFirstResult(range[0]);
-            return q.getResultList();
+        }
+        else {
+            q = getEntityManager().createNamedQuery("Poem.findAll");
         }
  
-        return super.findRange(range);
+        q.setMaxResults(range[1] - range[0]);
+        q.setFirstResult(range[0]);
+        return q.getResultList();
+        // return super.findRange(range);
 
     }
     
