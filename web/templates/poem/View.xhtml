@@ -13,7 +13,7 @@
                     <h1 class="display-4"><h:outputText value="#{poemController.selected.title}"></h:outputText></h1>
                     <hr/>
                     <div>
-                        <small class="text-muted">
+                        <small class="text-muted poem-info">
                             Created on 
                             <h:outputText value="#{poemController.selected.creationDate}">
                                 <f:convertDateTime pattern="dd/MM/yyyy" />
@@ -33,9 +33,7 @@
                     </h:panelGroup>
                     
                     <h:form class="poem-content">
-                        <h:panelGrid columns="2">
-                            <h:outputText value="#{poemController.selected.content}" title="#{bundle.ViewPoemTitle_content}"/>
-                        </h:panelGrid>
+                        <i><h:outputText value="#{poemController.selected.content}" title="#{bundle.ViewPoemTitle_content}"/></i>
                     </h:form>
                     
                     <!-- New Comment -->

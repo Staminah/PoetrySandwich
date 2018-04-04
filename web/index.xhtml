@@ -12,31 +12,32 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="display-4">Homepage</h1>
-                    
+                    <hr />
+                    <!--
                     <h:link outcome="/faces/myAdmin/homeAdmin" value="Home admin"/><br />
                     <h:link outcome="/faces/Editor/homeEditor" value="Home editor"/><br />
                     <h:link outcome="/faces/Author/homeAuthor" value="Home author"/>
+                    -->
                     
-                    <hr/>
-
-                    <p>Welcome #{request.remoteUser}!</p>
-                    
+                    <div id="welcome_box" class="alert alert-info" role="alert">
+                      Welcome #{request.remoteUser}!
+                    </div>                   
                     
  
                     <c:if test="#{request.isUserInRole('ADMIN')}">
                         <h:link outcome="/faces/templates/comment/List" value="Show All Comment Items"/>
-                        <br />
+                        <!--<br />
                         <h:link outcome="/faces/templates/poem/List" value="Show All Poem Items"/>
                         <br />
-                        <h:link outcome="/faces/templates/role/List" value="Show All Role Items"/>
+                        <h:link outcome="/faces/templates/role/List" value="Show All Role Items"/>-->
                         <br />
                         <h:link outcome="/faces/templates/tag/List" value="Show All Tag Items"/>
                         <br />
                         <h:link outcome="/faces/templates/user/List" value="Show All User Items"/>
                         <br />
+                        <hr />
                     </c:if>
                     
-                    <hr />
                     
                        <h:form styleClass="jsfcrud_list_form">
                         <h:panelGroup id="messagePanel" layout="block">
@@ -44,17 +45,6 @@
                         </h:panelGroup>
                         <h:outputText escape="false" value="#{bundle.ListPoemEmpty}" rendered="#{poemController.items.rowCount == 0}"/>
                         <h:panelGroup rendered="#{poemController.items.rowCount > 0}">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center">
-                                  <li class="page-item">
-                                    <h:commandLink class="page-link" action="#{poemController.previous}" value="#{bundle.Previous}" rendered="#{poemController.pagination.hasPreviousPage}"/>&nbsp;
-                                  </li>
-                                  <li class="page-item disabled"><h:outputText class="page-link" value="#{poemController.pagination.pageFirstItem + 1}..#{poemController.pagination.pageLastItem + 1}/#{poemController.pagination.itemsCount}"/></li>
-                                  <li class="page-item">
-                                    <h:commandLink class="page-link" action="#{poemController.next}" value="#{bundle.Next}" rendered="#{poemController.pagination.hasNextPage}"/>&nbsp;
-                                  </li>
-                                </ul>
-                            </nav>
                             <h:dataTable value="#{poemController.items}" var="item" style="width: 100%;">
                                 <h:column>
                                     <div class="card">
@@ -94,10 +84,20 @@
                                   <br/>
                                 </h:column>
                             </h:dataTable>
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center">
+                                  <li class="page-item">
+                                    <h:commandLink class="page-link" action="#{poemController.previous}" value="#{bundle.Previous}" rendered="#{poemController.pagination.hasPreviousPage}"/>&nbsp;
+                                  </li>
+                                  <li class="page-item disabled"><h:outputText class="page-link" value="#{poemController.pagination.pageFirstItem + 1}..#{poemController.pagination.pageLastItem + 1}/#{poemController.pagination.itemsCount}"/></li>
+                                  <li class="page-item">
+                                    <h:commandLink class="page-link" action="#{poemController.next}" value="#{bundle.Next}" rendered="#{poemController.pagination.hasNextPage}"/>&nbsp;
+                                  </li>
+                                </ul>
+                            </nav>
                         </h:panelGroup>
                         <br />
                     </h:form>
-                    
                 </div>
             </div>
         </ui:define>

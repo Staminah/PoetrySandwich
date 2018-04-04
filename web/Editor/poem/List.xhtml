@@ -12,12 +12,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="display-4">Poem Moderation</h1>
-                    <hr/>
+                    <hr/>                        
+                    
+                    <h:panelGroup id="messagePanel" layout="block">
+                       <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
                     
                     <h:form styleClass="jsfcrud_list_form">
-                        <h:panelGroup id="messagePanel" layout="block">
-                            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                        </h:panelGroup>
+
                         <h:outputText escape="false" value="#{bundle.ListPoemEmpty}" rendered="#{poemController.getPoemByValidationState('p').rowCount == 0}"/>
                         <h:panelGroup rendered="#{poemController.getPoemByValidationState('p').rowCount > 0}">
                            <h:dataTable value="#{poemController.getPoemByValidationState('p')}" var="item" style="width: 100%;">
