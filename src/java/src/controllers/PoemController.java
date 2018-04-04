@@ -175,19 +175,31 @@ public class PoemController implements Serializable {
         // Poem Validation
         current.setValidated(validated);
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "/faces/templates/poem/Edit.xhtml";
+        return "/faces/Author/poem/Edit.xhtml";
     }
     
     public String prepareEditForItem(Poem item) {
         current = item;
-        return "/faces/templates/poem/Edit.xhtml";
+        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+        HttpServletRequest request = (HttpServletRequest)context.getRequest();
+        User currentUser = getFacade().getCurrentUser(request.getRemoteUser());
+        
+        char validated = 'v';
+        
+        if(!request.isUserInRole("ADMIN")){
+            current.setFkUser(currentUser); 
+            validated = 'p';
+        }
+        // Poem Validation
+        current.setValidated(validated);
+        return "/faces/Author/poem/Edit.xhtml";
     }
 
     public String update() {
         try {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PoemUpdated"));
-            return "/faces/templates/poem/View.xhtml";
+            return "/faces/Author/poem/List.xhtml";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -221,7 +233,7 @@ public class PoemController implements Serializable {
         performDestroy();
         recreatePagination();
         recreateModel();
-        return "/faces/templates/poem/List.xhtml";
+        return "/faces/Author/poem/List.xhtml";
     }
     
     public String destroyItem(Poem item) {
@@ -229,7 +241,7 @@ public class PoemController implements Serializable {
         performDestroy();
         recreatePagination();
         recreateModel();
-        return "/faces/index.xhtml";
+        return "/faces/Author/poem/List.xhtml";
     }
 
     public String destroyAndView() {

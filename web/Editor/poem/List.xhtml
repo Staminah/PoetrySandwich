@@ -22,7 +22,7 @@
                         <h:panelGroup rendered="#{poemController.getPoemByValidationState('p').rowCount > 0}">
                            <h:dataTable value="#{poemController.getPoemByValidationState('p')}" var="item" style="width: 100%;">
                                <h:column>
-                                    <div class="card #{item.validated}">
+                                    <div class="card #{item.validated}-state">
                                         <div class="card-body">
                                             <h5 class="card-title">#{item.title}</h5>
                                             <p><i>#{item.content}</i></p>
@@ -37,6 +37,8 @@
                                                     <h:outputText value="#{item.creationDate}">
                                                         <f:convertDateTime pattern="HH:mm:ss" />
                                                     </h:outputText>
+                                                     by 
+                                                    <h:outputText value="#{item.fkUser.username}" />
                                                 </small>
                                             </p>
                                             <h:commandLink class="btn btn-success btn-sm float-right" action="#{poemController.updateValidationState(item, 'v')}" value="#{bundle.ListModerationPoemValidated}"/>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="body">
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="display-4"><h:outputText value="#{bundle.EditPoemTitle}"></h:outputText></h1>
+                    <hr/>
+                    
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    <h:form>
+                        <h:panelGrid columns="2">
+                            <c:if test="#{request.isUserInRole('ADMIN')}">
+                            <h:outputLabel value="#{bundle.EditPoemLabel_pkPoem}" for="pkPoem" />
+                            <h:inputText id="pkPoem" value="#{poemController.selected.pkPoem}" title="#{bundle.EditPoemTitle_pkPoem}" required="true" requiredMessage="#{bundle.EditPoemRequiredMessage_pkPoem}"/>
+                            </c:if>
+                            <h:outputLabel value="#{bundle.EditPoemLabel_title}" for="title" />
+                            <h:inputText id="title" value="#{poemController.selected.title}" title="#{bundle.EditPoemTitle_title}" required="true" requiredMessage="#{bundle.EditPoemRequiredMessage_title}"/>
+                            <h:outputLabel value="#{bundle.EditPoemLabel_content}" for="content" />
+                            <h:inputTextarea rows="4" cols="30" id="content" value="#{poemController.selected.content}" title="#{bundle.EditPoemTitle_content}" required="true" requiredMessage="#{bundle.EditPoemRequiredMessage_content}"/>
+                            <c:if test="#{request.isUserInRole('ADMIN')}">
+                            <h:outputLabel value="#{bundle.EditPoemLabel_creationDate}" for="creationDate" />
+                            <h:inputText id="creationDate" value="#{poemController.selected.creationDate}" title="#{bundle.EditPoemTitle_creationDate}" required="true" requiredMessage="#{bundle.EditPoemRequiredMessage_creationDate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:inputText>
+                            <h:outputLabel value="#{bundle.EditPoemLabel_validated}" for="validated" />
+                            <h:inputText id="validated" value="#{poemController.selected.validated}" title="#{bundle.EditPoemTitle_validated}" required="true" requiredMessage="#{bundle.EditPoemRequiredMessage_validated}"/>
+                            <h:outputLabel value="#{bundle.EditPoemLabel_fkUser}" for="fkUser" />
+                            <h:selectOneMenu id="fkUser" value="#{poemController.selected.fkUser}" title="#{bundle.EditPoemTitle_fkUser}" required="true" requiredMessage="#{bundle.EditPoemRequiredMessage_fkUser}">
+                                <f:selectItems value="#{userController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+                            </c:if>
+                        </h:panelGrid>
+                        <h:commandLink action="#{poemController.update}" value="#{bundle.EditPoemSaveLink}"/>
+                    </h:form>
+                    
+                </div>
+            </div>
+            
+        </ui:define>
+    </ui:composition>
+
+</html>

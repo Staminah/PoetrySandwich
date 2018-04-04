@@ -39,7 +39,7 @@
                                 </c:if>
                                 
                                 <h:outputLabel value="#{bundle.CreateTagLabel_name}" for="tagCollection" />
-                                <h:selectManyMenu class="selectManyMenu" id="tagCollection" value="#{poemController.selected.tagCollection}" title="#{bundle.CreateTagTitle}" required="false" requiredMessage="#{bundle.CreateTagRequiredMessage_pkTag}">
+                                <h:selectManyMenu class="selectManyMenu" id="tagCollection" value="#{poemController.selected.tagCollection}" title="#{bundle.CreateTagTitle}" required="true" requiredMessage="#{bundle.CreateTagRequiredMessage_pkTag}">
                                     <f:selectItems value="#{tagController.getItemsAvailableSelectMany()}"/>
                                     <f:converter converterId="tagConverter" />
                                 </h:selectManyMenu>

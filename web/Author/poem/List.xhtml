@@ -41,8 +41,8 @@
                                             </p>
                                             <h:commandLink class="btn btn-danger btn-sm float-right" action="#{poemController.destroyItem(item)}" value="#{bundle.ListPoemDestroyLink}"/>
                                             <h:outputText class="float-right" value="&nbsp;"/>
-                                            <h:commandLink class="btn btn-info btn-sm float-right" action="#{poemController.prepareEditForItem(item)}" value="#{bundle.ListPoemEditLink}"/>
-                                            <h:outputText class="float-right" value="&nbsp;"/>
+                                            <h:commandLink rendered="#{item.validated != 118}" class="btn btn-info btn-sm float-right" action="#{poemController.prepareEditForItem(item)}" value="#{bundle.ListPoemEditLink}"/>
+                                            <h:outputText rendered="#{item.validated != 118}" class="float-right" value="&nbsp;"/>
                                             <h:commandLink class="btn btn-primary btn-sm float-right" action="#{poemController.prepareViewForItem(item)}" value="#{bundle.ListPoemViewLink}"/>
                                         </div>
                                     </div>

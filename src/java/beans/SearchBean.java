@@ -7,17 +7,11 @@ package beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.component.UIComponent;
-import javax.faces.component.UIViewRoot;
-import javax.faces.context.FacesContext;
 import src.entities.Poem;
-import src.facades.PoemFacade;
 
  /**
  *
@@ -30,10 +24,10 @@ public class SearchBean implements Serializable{
 
     private String keyword;
     private String searchBy = "PoemTitle";
+    
     @EJB
     private src.facades.PoemFacade poemFacade;
     
-
     public SearchBean() {
     }
 
@@ -55,21 +49,19 @@ public class SearchBean implements Serializable{
 
     public List<Poem> getPoems() {
         List<Poem> poems;
-        System.out.println("POEMS");
-        if(null == keyword || "".equals(keyword)) {
+        
+        if (null == keyword || "".equals(keyword)) {
             poems = new ArrayList<Poem>();
-        } else {
-            if(searchBy.equals("PoemTitle")){
-                
+        }
+        else {
+            if(searchBy.equals("PoemTitle")) {
                 poems = poemFacade.getPoemsByTitle(keyword);
             }
-            else{
+            else {
                 poems = poemFacade.getPoemsByTag(keyword);
             }
-            
         }
-        
-        
+           
         return poems;
     }
 }
