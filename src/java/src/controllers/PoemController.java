@@ -290,8 +290,11 @@ public class PoemController implements Serializable {
             if (searchFilter.equals("Title")) {
                 searchedPoems = getFacade().getValidatedPoemsByTitle("%" + searchContent + "%");
             }
-            else {
+            else if (searchFilter.equals("Tag")) {
                 searchedPoems = getFacade().getValidatedPoemsByTag("%" + searchContent + "%");
+            }
+            else {
+                searchedPoems = getFacade().getValidatedPoemsByUsername("%" + searchContent + "%");
             }
         }
         

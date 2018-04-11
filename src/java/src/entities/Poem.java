@@ -48,7 +48,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Poem.findByCreationDate", query = "SELECT p FROM Poem p WHERE p.creationDate = :creationDate")
     , @NamedQuery(name = "Poem.findByValidated", query = "SELECT p FROM Poem p WHERE p.validated = :validated ORDER BY p.creationDate DESC")
     , @NamedQuery(name = "Poem.findByValidatedCount", query = "SELECT COUNT(p.pkPoem) FROM Poem p WHERE p.validated = :validated")
-    , @NamedQuery(name = "Poem.findByFkUser", query = "SELECT p FROM Poem p WHERE p.fkUser = :fkUser ORDER BY p.creationDate DESC")})
+    , @NamedQuery(name = "Poem.findByFkUser", query = "SELECT p FROM Poem p WHERE p.fkUser = :fkUser ORDER BY p.creationDate DESC")
+    , @NamedQuery(name = "Poem.findValidatedByUsername", query = "SELECT p FROM Poem p WHERE p.fkUser.username LIKE :username AND p.validated = 'v'")})
 public class Poem implements Serializable {
 
     private static final long serialVersionUID = 1L;

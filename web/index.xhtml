@@ -25,17 +25,15 @@
                     
  
                     <c:if test="#{request.isUserInRole('ADMIN')}">
-                        <h:link outcome="/faces/templates/comment/List" value="Show All Comment Items"/>
-                        <!--<br />
-                        <h:link outcome="/faces/templates/poem/List" value="Show All Poem Items"/>
-                        <br />
-                        <h:link outcome="/faces/templates/role/List" value="Show All Role Items"/>-->
-                        <br />
-                        <h:link outcome="/faces/templates/tag/List" value="Show All Tag Items"/>
-                        <br />
-                        <h:link outcome="/faces/templates/user/List" value="Show All User Items"/>
-                        <br />
-                        <hr />
+                        <div class="btn-group" style="width:100%;">
+                                <h:link class="btn btn-outline-info" style="width:100%;" outcome="/faces/templates/comment/List" value="Show All Comment Items"/>
+                                <!--<h:link outcome="/faces/templates/poem/List" value="Show All Poem Items"/>
+                                <h:link outcome="/faces/templates/role/List" value="Show All Role Items"/>-->
+                                <h:link class="btn btn-outline-info" style="width:100%;" outcome="/faces/templates/tag/List" value="Show All Tag Items"/>
+                                <h:link class="btn btn-outline-info" style="width:100%;" outcome="/faces/templates/user/List" value="Show All User Items"/>
+                        </div>
+                        <br/>
+                        <br/>
                     </c:if>
                     
                     
