@@ -50,20 +50,22 @@
                 </div>
             </form> -->
             <h:form>
-                <div class="input-group w-100">
-                    <div class="input-group-prepend">
-                        <h:selectOneMenu id="inputGroupSelect" class="custom-select search-select form-control" value="#{poemController.searchFilter}">
-                            <f:selectItem itemLabel="Filter by..." itemValue="Filter"/> 
-                            <f:selectItem itemLabel="Title" itemValue="Title"/>
-                            <f:selectItem itemLabel="Tag" itemValue="Tag"/>
-                            <f:selectItem itemLabel="Author" itemValue="Author"/>
-                        </h:selectOneMenu>
-                    </div>
-                    <h:inputText id="search_form" class="form-control" value="#{poemController.searchContent}"></h:inputText>
-                    <div class="input-group-append">
-                        <h:commandLink class="float-right btn btn-outline-light my-2 my-sm-0 form-control" action="#{poemController.searchPoem}">
-                            <i class="material-icons">search</i>Search
-                        </h:commandLink>
+                <div class="inline">
+                    <div class="input-group w-100">
+                        <div class="input-group-prepend">
+                            <h:selectOneMenu id="inputGroupSelect" class="custom-select search-select" value="#{poemController.searchFilter}">
+                                <f:selectItem itemLabel="Filter by..." itemValue="Filter"/> 
+                                <f:selectItem itemLabel="Title" itemValue="Title"/>
+                                <f:selectItem itemLabel="Tag" itemValue="Tag"/>
+                                <f:selectItem itemLabel="Author" itemValue="Author"/>
+                            </h:selectOneMenu>
+                        </div>
+                        <h:inputText id="search_form" class="form-control" value="#{poemController.searchContent}"></h:inputText>
+                        <div class="input-group-append">
+                            <h:commandLink id="btn_search" class="btn btn-outline-light btn-sm" action="#{poemController.searchPoem}">
+                                <i class="material-icons">search</i>Search
+                            </h:commandLink>
+                        </div>
                     </div>
                 </div>
             </h:form>

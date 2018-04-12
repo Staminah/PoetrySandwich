@@ -126,3 +126,7 @@ body {
 .search-select {
     border-radius: .25rem .0rem .0rem .25rem !important;
 }
+
+.input-group-append > a {
+    padding-top: 7px;
+}
