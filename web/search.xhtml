@@ -12,11 +12,10 @@
                 <div class="col-md-12">
                     <h1 class="display-4">Search results</h1>
                     <hr />
-                    
-                    <h:form styleClass="jsfcrud_list_form">
                         <h:panelGroup id="messagePanel" layout="block">
                             <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                        </h:panelGroup>
+                        </h:panelGroup>                    
+                    <h:form styleClass="jsfcrud_list_form">
                         <h:outputText escape="false" value="#{bundle.ListPoemEmpty}" rendered="#{poemController.searchedPoems.rowCount == 0}"/>
                         <h:panelGroup rendered="#{poemController.searchedPoems.rowCount > 0}">
                             <h:dataTable value="#{poemController.searchedPoems}" var="item" style="width: 100%;">

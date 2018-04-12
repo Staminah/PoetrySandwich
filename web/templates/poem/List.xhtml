@@ -12,11 +12,10 @@
                 <div class="col-md-12">
                     <h1 class="display-4"> <h:outputText value="#{bundle.ListPoemTitle}"></h:outputText></h1>
                     <hr/>
-                    
-                    <h:form styleClass="jsfcrud_list_form">
                         <h:panelGroup id="messagePanel" layout="block">
                             <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                         </h:panelGroup>
+                    <h:form styleClass="jsfcrud_list_form">
                         <h:outputText escape="false" value="#{bundle.ListPoemEmpty}" rendered="#{poemController.items.rowCount == 0}"/>
                         <h:panelGroup rendered="#{poemController.items.rowCount > 0}">
                             <h:outputText value="#{poemController.pagination.pageFirstItem + 1}..#{poemController.pagination.pageLastItem + 1}/#{poemController.pagination.itemsCount}"/>&nbsp;
