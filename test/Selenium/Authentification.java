@@ -34,7 +34,7 @@ public class Authentification {
 
   @Before
   public void setUp() throws Exception {
-    System.setProperty("webdriver.chrome.driver", "C:/Users/christop.hirschi/Documents/JEE/chromedriver.exe");
+    System.setProperty("webdriver.chrome.driver", "C:/temp/chromedriver.exe");
     driver = new ChromeDriver();
     baseUrl = "http://www.he-arc.ch/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
