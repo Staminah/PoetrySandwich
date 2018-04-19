@@ -5,7 +5,6 @@
  */
 package Selenium;
 
-import static java.lang.Math.random;
 import java.util.Random;
 import org.junit.After;
 import org.junit.Before;

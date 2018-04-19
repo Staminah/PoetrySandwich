@@ -21,9 +21,7 @@
                     
                     <div id="welcome_box" class="alert alert-info" role="alert">
                       Welcome #{request.remoteUser}!
-                    </div>                   
-                    
- 
+                    </div>
                     <c:if test="#{request.isUserInRole('ADMIN')}">
                         <div class="btn-group" style="width:100%;">
                                 <h:link class="btn btn-outline-info" style="width:100%;" outcome="/faces/myAdmin/comment/List" value="Show All Comment Items"/>
@@ -35,8 +33,6 @@
                         <br/>
                         <br/>
                     </c:if>
-                    
-                    
                        <h:form styleClass="jsfcrud_list_form">
                         <h:panelGroup id="messagePanel" layout="block">
                             <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
