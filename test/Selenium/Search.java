@@ -10,8 +10,10 @@ import org.junit.Before;
 import static org.junit.Assert.*;
 import java.util.concurrent.TimeUnit;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 
 /**
  *
@@ -45,6 +47,48 @@ public class Search {
     String verificationErrorString = verificationErrors.toString();
     if (!"".equals(verificationErrorString)) {
       fail(verificationErrorString);
+    }
+  }
+  
+  @Test
+  public void titleSearchFromHome() throws Exception {
+    driver.get("http://localhost:8080/PoetrySandwich/");
+    new Select(driver.findElement(By.id("j_idt14:inputGroupSelect"))).selectByVisibleText("Title");
+    driver.findElement(By.id("j_idt14:search_form")).clear();
+    driver.findElement(By.id("j_idt14:search_form")).sendKeys("demo");
+    driver.findElement(By.id("j_idt14:btn_search")).click();
+    try {
+      assertEquals("(No Poem Items Found)", driver.findElement(By.id("j_idt46")).getText());
+    } catch (Error e) {
+      verificationErrors.append(e.toString());
+    }
+  }
+  
+  @Test
+  public void tagSearchFromHome() throws Exception {
+    driver.get("http://localhost:8080/PoetrySandwich/");
+    new Select(driver.findElement(By.id("j_idt14:inputGroupSelect"))).selectByVisibleText("Tag");
+    driver.findElement(By.id("j_idt14:search_form")).clear();
+    driver.findElement(By.id("j_idt14:search_form")).sendKeys("demo");
+    driver.findElement(By.id("j_idt14:btn_search")).click();
+    try {
+      assertEquals("(No Poem Items Found)", driver.findElement(By.id("j_idt46")).getText());
+    } catch (Error e) {
+      verificationErrors.append(e.toString());
+    }
+  }
+  
+  @Test
+  public void authorSearchFromHome() throws Exception {
+    driver.get("http://localhost:8080/PoetrySandwich/");
+    new Select(driver.findElement(By.id("j_idt14:inputGroupSelect"))).selectByVisibleText("Author");
+    driver.findElement(By.id("j_idt14:search_form")).clear();
+    driver.findElement(By.id("j_idt14:search_form")).sendKeys("demo");
+    driver.findElement(By.id("j_idt14:btn_search")).click();
+    try {
+      assertEquals("(No Poem Items Found)", driver.findElement(By.id("j_idt46")).getText());
+    } catch (Error e) {
+      verificationErrors.append(e.toString());
     }
   }
 
