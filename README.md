@@ -11,8 +11,9 @@ Website about poems. Realised in JEE with JSF Framework.
  3. The database must be accessible via a user named **root** with an **empty password**
  4. Open NetBeans and do *File > Open Project > Choose your freshly cloned directory*
  5. Locate your Glassfish folder and go to the config folder of your domain (*C:\Users\YourName\glassfish-4.1.2\glassfish4\glassfish\domains\domain1\config*), then replace the file named **domain.xml** by the one at the root of this repo.
- 6. You should now be able to run the **index.xhtml** file and access to the website of this project.
- 7. You should be able to login with the following users :
+ 6. You have now to add the Selenium Jar files to your project to make it work (or delete everything about Selenium)
+ 7. You should now be able to run the **index.xhtml** file and access to the website of this project.
+ 8. You should be able to login with the following users :
 
 | Username | Password | Role |
 |--|--|--|
