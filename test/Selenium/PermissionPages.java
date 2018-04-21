@@ -50,7 +50,7 @@ public class PermissionPages {
     driver.findElement(By.id("username")).clear();
     driver.findElement(By.id("username")).sendKeys("admin");
     driver.findElement(By.id("password")).clear();
-    driver.findElement(By.id("password")).sendKeys("admin");
+    driver.findElement(By.id("password")).sendKeys("okok");
     driver.findElement(By.xpath("//input[@value='Login']")).click();
     driver.get("http://localhost:8080/PoetrySandwich/faces/myAdmin/tag/List.xhtml");
     try {
@@ -65,9 +65,9 @@ public class PermissionPages {
     driver.get("http://localhost:8080/PoetrySandwich/");
     driver.findElement(By.linkText("personLogin")).click();
     driver.findElement(By.id("username")).clear();
-    driver.findElement(By.id("username")).sendKeys("editor");
+    driver.findElement(By.id("username")).sendKeys("anthony");
     driver.findElement(By.id("password")).clear();
-    driver.findElement(By.id("password")).sendKeys("editor");
+    driver.findElement(By.id("password")).sendKeys("okok");
     driver.findElement(By.xpath("//input[@value='Login']")).click();
     driver.get("http://localhost:8080/PoetrySandwich/faces/myAdmin/tag/List.xhtml");
     try {
@@ -82,9 +82,9 @@ public class PermissionPages {
     driver.get("http://localhost:8080/PoetrySandwich/");
     driver.findElement(By.linkText("personLogin")).click();
     driver.findElement(By.id("username")).clear();
-    driver.findElement(By.id("username")).sendKeys("author");
+    driver.findElement(By.id("username")).sendKeys("steve");
     driver.findElement(By.id("password")).clear();
-    driver.findElement(By.id("password")).sendKeys("author");
+    driver.findElement(By.id("password")).sendKeys("okok");
     driver.findElement(By.xpath("//input[@value='Login']")).click();
     driver.get("http://localhost:8080/PoetrySandwich/faces/myAdmin/tag/List.xhtml");
     try {
@@ -101,7 +101,7 @@ public class PermissionPages {
     driver.findElement(By.id("username")).clear();
     driver.findElement(By.id("username")).sendKeys("admin");
     driver.findElement(By.id("password")).clear();
-    driver.findElement(By.id("password")).sendKeys("admin");
+    driver.findElement(By.id("password")).sendKeys("okok");
     driver.findElement(By.xpath("//input[@value='Login']")).click();
     driver.get("http://localhost:8080/PoetrySandwich/faces/Editor/poem/List.xhtml");
     try {
@@ -116,9 +116,9 @@ public class PermissionPages {
     driver.get("http://localhost:8080/PoetrySandwich/");
     driver.findElement(By.linkText("personLogin")).click();
     driver.findElement(By.id("username")).clear();
-    driver.findElement(By.id("username")).sendKeys("editor");
+    driver.findElement(By.id("username")).sendKeys("anthony");
     driver.findElement(By.id("password")).clear();
-    driver.findElement(By.id("password")).sendKeys("editor");
+    driver.findElement(By.id("password")).sendKeys("okok");
     driver.findElement(By.xpath("//input[@value='Login']")).click();
     driver.get("http://localhost:8080/PoetrySandwich/faces/Editor/poem/List.xhtml");
     try {
@@ -133,9 +133,9 @@ public class PermissionPages {
     driver.get("http://localhost:8080/PoetrySandwich/");
     driver.findElement(By.linkText("personLogin")).click();
     driver.findElement(By.id("username")).clear();
-    driver.findElement(By.id("username")).sendKeys("author");
+    driver.findElement(By.id("username")).sendKeys("steve");
     driver.findElement(By.id("password")).clear();
-    driver.findElement(By.id("password")).sendKeys("author");
+    driver.findElement(By.id("password")).sendKeys("okok");
     driver.findElement(By.xpath("//input[@value='Login']")).click();
     driver.get("http://localhost:8080/PoetrySandwich/faces/Editor/poem/List.xhtml");
     try {
@@ -152,7 +152,7 @@ public class PermissionPages {
     driver.findElement(By.id("username")).clear();
     driver.findElement(By.id("username")).sendKeys("admin");
     driver.findElement(By.id("password")).clear();
-    driver.findElement(By.id("password")).sendKeys("admin");
+    driver.findElement(By.id("password")).sendKeys("okok");
     driver.findElement(By.xpath("//input[@value='Login']")).click();
     driver.get("http://localhost:8080/PoetrySandwich/faces/Author/poem/Create.xhtml");
     try {
@@ -167,9 +167,9 @@ public class PermissionPages {
     driver.get("http://localhost:8080/PoetrySandwich/");
     driver.findElement(By.linkText("personLogin")).click();
     driver.findElement(By.id("username")).clear();
-    driver.findElement(By.id("username")).sendKeys("editor");
+    driver.findElement(By.id("username")).sendKeys("anthony");
     driver.findElement(By.id("password")).clear();
-    driver.findElement(By.id("password")).sendKeys("editor");
+    driver.findElement(By.id("password")).sendKeys("okok");
     driver.findElement(By.xpath("//input[@value='Login']")).click();
     driver.get("http://localhost:8080/PoetrySandwich/faces/Author/poem/Create.xhtml");
     try {
@@ -184,9 +184,9 @@ public class PermissionPages {
     driver.get("http://localhost:8080/PoetrySandwich/");
     driver.findElement(By.linkText("personLogin")).click();
     driver.findElement(By.id("username")).clear();
-    driver.findElement(By.id("username")).sendKeys("author");
+    driver.findElement(By.id("username")).sendKeys("steve");
     driver.findElement(By.id("password")).clear();
-    driver.findElement(By.id("password")).sendKeys("author");
+    driver.findElement(By.id("password")).sendKeys("okok");
     driver.findElement(By.xpath("//input[@value='Login']")).click();
     driver.get("http://localhost:8080/PoetrySandwich/faces/Author/poem/Create.xhtml");
     try {
